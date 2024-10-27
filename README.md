@@ -1,1 +1,1 @@
-this is a readme, but why are you reading it?  just read the webpage, duh
+I am considering moving my website to GitHub... this is a work in progress as I explore how costly it will be!
