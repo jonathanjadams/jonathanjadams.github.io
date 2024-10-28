@@ -1604,6 +1604,35 @@ hr {
 	padding-left: 30px;
 }
 
+/* 
+/*  m3. working papers Section
+/* =================================================================== */
+
+#workingpapers {
+	background: #ecf0f1;
+	padding-top: 120px;
+	padding-bottom: 120px;
+	text-align: left;
+}
+/* #workingpapers .workingpapers-content {
+	max-width: 934px;
+}*/
+/*#workingpapers  h3 {
+	font: 16px/36px "raleway-heavy", sans-serif;
+	text-transform: none;
+	padding: 0;
+	margin-bottom: 0;
+}*/
+#workingpapers p {
+	color: #707273;
+}
+#workingpapers .left {
+	padding-right: 30px;
+}
+#workingpapers .right {
+	padding-left: 30px;
+}
+
 
 
 /* 
