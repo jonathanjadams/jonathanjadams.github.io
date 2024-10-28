@@ -1598,10 +1598,10 @@ hr {
 	color: #707273;
 }
 #publications .left {
-	padding-right: 30px;
+	padding-right: 10px;
 }
 #publications .right {
-	padding-left: 30px;
+	padding-left: 10px;
 }
 
 /* 
@@ -1627,10 +1627,10 @@ hr {
 	color: #707273;
 }
 #workingpapers .left {
-	padding-right: 30px;
+	padding-right: 10px;
 }
 #workingpapers .right {
-	padding-left: 30px;
+	padding-left: 10px;
 }
 
 
@@ -1658,10 +1658,10 @@ hr {
 	color: #707273;
 }
 #otherresearch .left {
-	padding-right: 30px;
+	padding-right: 10px;
 }
 #otherresearch .right {
-	padding-left: 30px;
+	padding-left: 10px;
 }
 
 
