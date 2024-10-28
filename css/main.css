@@ -62,16 +62,16 @@ a:hover, a:focus {
 	color: black;
 }
 
-/* Typography
+/* Typography - I added h7 to this list (1-6 are defaults)
 --------------------------------------------------------------------- */
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, h7 {
 	font-family: "raleway-bold", sans-serif;
 	color: #252525;
 	font-style: normal;
 	text-rendering: optimizeLegibility;
 	margin: 18px 0 15px;
 }
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a, h7 a {
 	font-weight: inherit;
 }
 h1 {
@@ -105,6 +105,10 @@ h6 {
 	margin-top: 15px;
 	text-transform: uppercase;
 	letter-spacing: 1px;
+}
+h7 {
+	font-size: 12px;
+	line-height: 20px;
 }
 p {
 	margin: 15px 0 15px 0;
