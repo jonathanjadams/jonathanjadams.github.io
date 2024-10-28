@@ -62,16 +62,16 @@ a:hover, a:focus {
 	color: black;
 }
 
-/* Typography - I added h7 to this list (1-6 are defaults)
+/* Typography
 --------------------------------------------------------------------- */
-h1, h2, h3, h4, h5, h6, h7 {
+h1, h2, h3, h4, h5, h6 {
 	font-family: "raleway-bold", sans-serif;
 	color: #252525;
 	font-style: normal;
 	text-rendering: optimizeLegibility;
 	margin: 18px 0 15px;
 }
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a, h7 a {
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 	font-weight: inherit;
 }
 h1 {
@@ -106,10 +106,7 @@ h6 {
 	text-transform: uppercase;
 	letter-spacing: 1px;
 }
-h7 {
-	font-size: 12px;
-	line-height: 20px;
-}
+
 p {
 	margin: 15px 0 15px 0;
 }
@@ -120,6 +117,12 @@ p.lead {
 	font: 17px/33px "merriweather-light", serif;
 	color: #707273;
 }
+/* I added for abstracts: */
+absfont {
+	font-size: 12px;
+	line-height: 20px;
+}
+
 em {
 	font: 15px/30px "merriweather-italic", serif;
 	font-style: normal;
