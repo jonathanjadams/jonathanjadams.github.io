@@ -1419,7 +1419,7 @@ hr {
 	margin: 0 6px;
 	display: inline-block;
 	zoom: 1;
-	*display: inline;
+	display: inline;
 }
 .hero-content .flex-control-paging li a {
 	width: 15px;
@@ -1640,14 +1640,41 @@ hr {
 	padding-left: 10px;
 }
 
+/* 
+/*  m4. policywork Section
+/* =================================================================== */
 
+#policywork {
+	background: #ecf0f1;
+	padding-top: 120px;
+	padding-bottom: 120px;
+	text-align: left;
+}
+#policywork .policywork-content {
+	max-width: 934px;
+}
+/*#otherresearch h3 {
+	font: 16px/36px "raleway-heavy", sans-serif;
+	text-transform: none;
+	padding: 0;
+	margin-bottom: 0;
+}*/
+#policywork p {
+	color: #707273;
+}
+#policywork .left {
+	padding-right: 10px;
+}
+#policywork .right {
+	padding-left: 10px;
+}
 
 /* 
 /*  n. otherresearch Section
 /* =================================================================== */
 
 #otherresearch {
-	background: #ecf0f1;
+	background: white;
 	padding-top: 120px;
 	padding-bottom: 120px;
 	text-align: left;
