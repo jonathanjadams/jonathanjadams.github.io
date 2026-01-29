@@ -155,7 +155,7 @@
         <header>
             <h1>📊 Macro-Casting Dashboard</h1>
             <p>Real-time nowcasts, backcasts, and forecasts for U.S. inflation and unemployment.  Estimated from high frequency macroeconomic data.</p>
-            <p class="timestamp">Generated: 2026-01-29 15:37</p>
+            <p class="timestamp">Generated: 2026-01-29 15:43</p>
         </header>
         
         <div class="summary-cards">
@@ -418,7 +418,7 @@
             const showCI = document.getElementById('show-ci').checked;
             const showChronos = document.getElementById('show-chronos').checked;
             
-            // Include all data points; default visible x-range is 2024-01-01 -> today + 1 year.
+            // Include all data points; default visible x-range is 2025-01-01 -> today + 1 year.
             const filteredData = series.data.slice(); // keep all points for zooming out
             
             if (filteredData.length === 0) return;
@@ -672,8 +672,8 @@
                 annotations: []
             };
 
-            // Default x-axis visible range (2024-01-01 -> today + 1 year)
-            const defaultStart = new Date('2024-01-01').toISOString().slice(0,10);
+            // Default x-axis visible range (2025-01-01 -> today + 1 year)
+            const defaultStart = new Date('2025-01-01').toISOString().slice(0,10);
             const defaultEndDate = new Date();
             defaultEndDate.setFullYear(defaultEndDate.getFullYear() + 1);
             const defaultEnd = defaultEndDate.toISOString().slice(0,10);
