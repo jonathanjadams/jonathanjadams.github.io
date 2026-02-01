@@ -509,8 +509,9 @@ p {
     }
     
     .profile-photo {
-        width: 140px;
-        height: 140px;
+        width: 100%;
+        max-width: 260px;
+        height: auto;
     }
     
     .paper {
@@ -518,11 +519,15 @@ p {
     }
     
     .paper-links {
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 0.4rem;
     }
-    
+
     .paper-link {
         justify-content: center;
+        padding: 0.35rem 0.7rem;
+        font-size: 0.78rem;
     }
 }
 
