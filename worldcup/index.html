@@ -866,7 +866,7 @@
 
   <script>
     const DRAFT_CONFIG = {
-      apiKey: "4a6f3667247344b6947ee479c4c5d179",
+      apiBase: "https://worldcup-proxy.todrv.com/v4",
       competitionCode: "WC",
       refreshMs: 60000,
       teams: {
@@ -988,11 +988,11 @@
       renderScoreboard(calculateScores([]));
       renderBracket(buildEmptyBracket());
       renderStatus({
-        mode: DRAFT_CONFIG.apiKey ? "demo" : "demo",
-        title: DRAFT_CONFIG.apiKey ? "Waiting for live results" : "API key missing",
-        message: DRAFT_CONFIG.apiKey
+        mode: DRAFT_CONFIG.apiBase ? "demo" : "demo",
+        title: DRAFT_CONFIG.apiBase ? "Waiting for live results" : "API proxy not configured",
+        message: DRAFT_CONFIG.apiBase
           ? "The page is configured to fetch live data. Until the endpoint responds, the bracket stays in placeholder mode."
-          : "Add your football-data.org API key to DRAFT_CONFIG.apiKey to enable live results on a static host.",
+          : "Set DRAFT_CONFIG.apiBase to your football-data.org proxy URL to enable live results.",
         updatedAt: null,
         matchCount: 0
       });
@@ -1209,12 +1209,7 @@
 
     async function fetchCompetitionResource(resourcePath = "") {
       const response = await fetch(
-        `https://api.football-data.org/v4/competitions/${encodeURIComponent(DRAFT_CONFIG.competitionCode)}${resourcePath}`,
-        {
-          headers: {
-            "X-Auth-Token": DRAFT_CONFIG.apiKey
-          }
-        }
+        `${DRAFT_CONFIG.apiBase}/competitions/${encodeURIComponent(DRAFT_CONFIG.competitionCode)}${resourcePath}`
       );
 
       if (!response.ok) {
@@ -1225,13 +1220,13 @@
     }
 
     async function loadLiveMatches() {
-      if (!DRAFT_CONFIG.apiKey) {
+      if (!DRAFT_CONFIG.apiBase) {
         return {
           matches: [],
           status: {
             mode: "demo",
-            title: "API key missing",
-            message: "Live results are disabled until DRAFT_CONFIG.apiKey is filled in.",
+            title: "API proxy not configured",
+            message: "Live results are disabled until DRAFT_CONFIG.apiBase is filled in.",
             updatedAt: null,
             matchCount: 0
           }
@@ -1286,7 +1281,7 @@
 
     function scheduleRefresh() {
       const now = new Date();
-      if (!DRAFT_CONFIG.apiKey || now < TOURNAMENT_START || now > TOURNAMENT_END) {
+      if (!DRAFT_CONFIG.apiBase || now < TOURNAMENT_START || now > TOURNAMENT_END) {
         return;
       }
 
