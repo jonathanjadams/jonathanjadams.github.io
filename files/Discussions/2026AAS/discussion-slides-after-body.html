@@ -1,0 +1,107 @@
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  if (!window.Reveal) {
+    return;
+  }
+
+  function getWrapperFromTrigger(trigger) {
+    var targetId = trigger.dataset.gifTarget;
+    if (!targetId) {
+      return null;
+    }
+
+    return document.getElementById(targetId);
+  }
+
+  function getGifFromWrapper(wrapper) {
+    if (!wrapper) {
+      return null;
+    }
+
+    return wrapper.querySelector('.deferred-gif[data-gif-src]');
+  }
+
+  function stopWrapper(wrapper) {
+    var img = getGifFromWrapper(wrapper);
+    if (!img) {
+      return;
+    }
+
+    img.removeAttribute('src');
+    wrapper.classList.remove('is-playing');
+  }
+
+  function startWrapper(wrapper) {
+    var img = getGifFromWrapper(wrapper);
+    if (!img) {
+      return;
+    }
+
+    var gifSrc = img.dataset.gifSrc;
+    if (!gifSrc) {
+      return;
+    }
+
+    wrapper.classList.add('is-playing');
+    img.removeAttribute('src');
+    requestAnimationFrame(function () {
+      img.setAttribute('src', gifSrc);
+    });
+  }
+
+  function resetSlide(slide) {
+    if (!slide) {
+      return;
+    }
+
+    slide.querySelectorAll('.gif-trigger[data-gif-target]').forEach(function (trigger) {
+      stopWrapper(getWrapperFromTrigger(trigger));
+    });
+  }
+
+  function syncSlide(slide) {
+    if (!slide) {
+      return;
+    }
+
+    slide.querySelectorAll('.gif-trigger[data-gif-target]').forEach(function (trigger) {
+      var wrapper = getWrapperFromTrigger(trigger);
+      if (!wrapper) {
+        return;
+      }
+
+      if (trigger.classList.contains('visible')) {
+        startWrapper(wrapper);
+      } else {
+        stopWrapper(wrapper);
+      }
+    });
+  }
+
+  Reveal.on('ready', function (event) {
+    document.querySelectorAll('.animation-swap').forEach(function (wrapper) {
+      stopWrapper(wrapper);
+    });
+    syncSlide(event.currentSlide);
+  });
+
+  Reveal.on('slidechanged', function (event) {
+    resetSlide(event.previousSlide);
+    syncSlide(event.currentSlide);
+  });
+
+  Reveal.on('fragmentshown', function (event) {
+    var fragment = event.fragment;
+    if (fragment instanceof HTMLElement && fragment.matches('.gif-trigger[data-gif-target]')) {
+      startWrapper(getWrapperFromTrigger(fragment));
+    }
+  });
+
+  Reveal.on('fragmenthidden', function (event) {
+    var fragment = event.fragment;
+    if (fragment instanceof HTMLElement && fragment.matches('.gif-trigger[data-gif-target]')) {
+      stopWrapper(getWrapperFromTrigger(fragment));
+    }
+  });
+});
+</script>

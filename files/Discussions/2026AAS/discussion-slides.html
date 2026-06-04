@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="discussion-slides_files/libs/clipboard/clipboard.min.js"></script>
+<script src="discussion-slides_files/libs/quarto-html/tabby.min.js"></script>
+<script src="discussion-slides_files/libs/quarto-html/popper.min.js"></script>
+<script src="discussion-slides_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="discussion-slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="discussion-slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="discussion-slides_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.27">
+
+  <title>discussion-slides</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="discussion-slides_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="discussion-slides_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="discussion-slides_files/libs/revealjs/dist/theme/quarto-0fde88a82f0356838740f155f1088782.css">
+  <link rel="stylesheet" href="discussion-slides.css">
+  <link href="discussion-slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="discussion-slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="discussion-slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="discussion-slides_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="discussion-of" class="slide level2 manual-title">
+<h2>Discussion of</h2>
+<div class="paper-title">
+<p>Strategic Complementarity = Persistence in Linear-Quadratic Mean Field Games</p>
+</div>
+<div class="paper-authors">
+<p>Fernando Alvarez, David Argente, and Thomas Sargent</p>
+</div>
+<div class="discussion-meta">
+<p>Jonathan J. Adams, FRB of Kansas City<br> Cowles Conference on Macroeconomics, Yale SoM<br> June 4, 2026</p>
+</div>
+<div class="title-disclaimer">
+<p>The views expressed are those of the author and do not necessarily reflect the positions of the Federal Reserve Bank of Kansas City or the Federal Reserve System.</p>
+</div>
+</section>
+<section id="why-you-should-care" class="slide level2">
+<h2>Why You Should Care</h2>
+<ul>
+<li class="fragment"><p>Clear lesson in the title: <strong>strategic complementarity slows the speed of convergence</strong></p></li>
+<li class="fragment"><p>Linear-quadratic representation gives a clean solution with perfect aggregation + <em>finite-dimensional</em> state space</p></li>
+</ul>
+<!-- - An example demonstrates how to approximate MFGs in this framework -->
+<ul>
+<li class="fragment"><p>Strategic complementarity changes the planner’s solution relative to the decentralized equilibrium</p></li>
+<li class="fragment"><p>An argument for future econometrics: strategic complementarity cannot be identified from cross-sectional data alone; aggregate time series are necessary</p></li>
+<li class="fragment"><p>Many other valuable results, methods, extensions</p></li>
+</ul>
+<!-- - My discussion will focus on the generality of the setting -->
+</section>
+<section id="solution-map" class="slide level2 math-slide two-box">
+<h2>Solution Map</h2>
+<div class="columns">
+<div class="column" style="width:44%;">
+<div class="math-box">
+<div class="box-title">
+<p>Step 1: Fix <span class="math inline">\(X(t)\)</span></p>
+</div>
+<p><span class="math display">\[
+\begin{aligned}
+\rho u(x,t) &amp;= -\frac{1}{2}x'Qx - X(t)'\Theta x + H(u_x,x) \\
+&amp;\quad + \frac{1}{2}\operatorname{tr}(\Sigma u_{xx}) + u_t(x,t)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+H(u_x,x) = -\frac{1}{2}\alpha^{*'}\Gamma\alpha^* + u_x'(B\alpha^* - Ax)
+\]</span></p>
+<p><span class="math display">\[
+\alpha^* = \Gamma^{-1} B' u_x
+\]</span> Conjecture quadratic solution: <span class="math display">\[
+u(x,t) = \beta_0(t) + \beta_1(t)'x + \frac{1}{2}x'\beta_2(t)x
+\]</span></p>
+</div>
+</div><div class="column" style="width:56%;">
+<div class="math-box fragment" data-fragment-index="1">
+<div class="box-title">
+<p>Step 2: Solve <span class="math inline">\(\beta_2 \rightarrow (\beta_1, X) \rightarrow \beta_0\)</span></p>
+</div>
+<p>Solve Riccati: <span class="math display">\[
+%\dot{\beta}_2
+0 = Q - \beta_2 B \Gamma^{-1} B' \beta_2 + \beta_2 A + A'\beta_2 + \rho \beta_2
+\]</span></p>
+<p>Solve system: <span class="math display">\[
+\begin{aligned}
+\begin{bmatrix}
+\dot{\beta}_1 \\
+\dot{X}
+\end{bmatrix}
+&amp;=
+\begin{bmatrix}
+\rho I_n + A' - \beta_2 B \Gamma^{-1} B' &amp; \Theta' \\
+B\Gamma^{-1}B' &amp; B\Gamma^{-1}B'\beta_2 - A
+\end{bmatrix}
+\begin{bmatrix}
+\beta_1 \\
+X
+\end{bmatrix}
+\end{aligned}
+\]</span></p>
+<p>Solve ODE: <span class="math display">\[
+\dot{\beta}_0 = \rho \beta_0 - \frac{1}{2}\beta_1' B \Gamma^{-1} B' \beta_1 - \frac{1}{2}\operatorname{tr}(\Sigma \beta_2)
+\]</span></p>
+</div>
+</div></div>
+<div class="fragment" data-fragment-index="2">
+<p>Perfect aggregation:</p>
+<ul>
+<li><p>agent’s drift is <span class="math inline">\(\mu(x,t) = (B\Gamma^{-1}B'\beta_2 - A)x + B\Gamma^{-1}B'\beta_1\)</span></p></li>
+<li><p>aggregate drift is <span class="math inline">\(\dot{X} = (B\Gamma^{-1}B'\beta_2 - A)X + B\Gamma^{-1}B'\beta_1\)</span></p></li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="3">
+<p>Perfect aggregation <span class="math inline">\(\implies\)</span> finite-dimensional state space <span class="math inline">\(\implies\)</span> + linearity = tractable <span class="math inline">\(\implies\)</span> theorems</p>
+</div>
+<div class="fragment" data-fragment-index="4">
+<p>Arbitrary matrices + light conditions <span class="math inline">\(\implies\)</span> generality (to an extent)</p>
+</div>
+</section>
+<section id="how-the-paper-handles-risk" class="slide level2 math-slide">
+<h2>How the Paper Handles Risk</h2>
+<div class="fragment" data-fragment-index="1">
+<p>In the benchmark MFG, idiosyncratic risk enters through a constant diffusion matrix <span class="math inline">\(\Sigma\)</span>:</p>
+<p><span class="math display">\[
+dx = (B\alpha - Ax)dt + \Sigma^{1/2} dW
+\]</span></p>
+<p><span class="math display">\[
+\rho u(x,t) = \cdots + \frac{1}{2}\operatorname{tr}(\Sigma u_{xx}(x,t)) + u_t(x,t)
+\]</span></p>
+</div>
+<div class="fragment" data-fragment-index="2">
+<p>In the industry example, risk is state-dependent before approximation:</p>
+<p><span class="math display">\[
+dk = i - \delta k + k\bar{\sigma} \, dW
+\]</span></p>
+<p><span class="math display">\[
+\rho \tilde v(k,t) = \cdots + \frac{k^2 \bar{\sigma}^2}{2}\tilde v_{kk}(k,t) + \tilde v_t(k,t)
+\]</span></p>
+</div>
+<div class="fragment" data-fragment-index="3">
+<p>Then the LQ approximation flattens that term to a constant coefficient:</p>
+<p><span class="math display">\[
+\rho u(x,t) = \cdots + \frac{(\bar{\sigma}/\bar{k})^2}{2}u_{xx}(x,t) + u_t(x,t)
+\]</span></p>
+</div>
+<!-- ::: {.fragment data-fragment-index="4"}
+> "The nature of the approximation is to consider small uncertainty and small deviations from the steady state with no uncertainty."
+::: -->
+</section>
+<section id="risk-does-not-affect-decisions" class="slide level2 math-slide two-box">
+<h2>Risk Does Not Affect Decisions</h2>
+<div class="columns">
+<div class="column" style="width:44%;">
+<div class="math-box">
+<div class="box-title">
+<p>Step 1: Fix <span class="math inline">\(X(t)\)</span></p>
+</div>
+<p><span class="math display">\[
+\begin{aligned}
+\rho u(x,t) &amp;= -\frac{1}{2}x'Qx - X(t)'\Theta x + H(u_x,x) \\
+&amp;\quad + \frac{1}{2}\operatorname{tr}({\color{red}\Sigma} u_{xx}) + u_t(x,t)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+H(u_x,x) = -\frac{1}{2}\alpha^{*'}\Gamma\alpha^* + u_x'(B\alpha^* - Ax)
+\]</span></p>
+<p><span class="math display">\[
+\alpha^* = \Gamma^{-1} B' u_x
+\]</span> Conjecture quadratic solution: <span class="math display">\[
+u(x,t) = {\color{red}{\beta_0}}(t) + \beta_1(t)'x + \frac{1}{2}x'\beta_2(t)x
+\]</span></p>
+</div>
+</div><div class="column" style="width:56%;">
+<div class="math-box">
+<div class="box-title">
+<p>Step 2: Solve <span class="math inline">\(\beta_2 \rightarrow (\beta_1, X) \rightarrow \beta_0\)</span></p>
+</div>
+<p>Solve Riccati: <span class="math display">\[
+0 = Q - \beta_2 B \Gamma^{-1} B' \beta_2 + \beta_2 A + A'\beta_2 + \rho \beta_2
+\]</span></p>
+<p>Solve system: <span class="math display">\[
+\begin{aligned}
+\begin{bmatrix}
+\dot{\beta}_1 \\
+\dot{X}
+\end{bmatrix}
+&amp;=
+\begin{bmatrix}
+\rho I_n + A' - \beta_2 B \Gamma^{-1} B' &amp; \Theta' \\
+B\Gamma^{-1}B' &amp; B\Gamma^{-1}B'\beta_2 - A
+\end{bmatrix}
+\begin{bmatrix}
+\beta_1 \\
+X
+\end{bmatrix}
+\end{aligned}
+\]</span></p>
+<p>Solve ODE: <span class="math display">\[
+\color{red}{\dot{\beta_0}} = \rho {\color{red}{\beta_0}} - \frac{1}{2}\beta_1' B \Gamma^{-1} B' \beta_1 - \frac{1}{2}\operatorname{tr}({\color{red}\Sigma} \beta_2)
+\]</span></p>
+</div>
+</div></div>
+<ul>
+<li><p>Constant coefficient risk <span class="math inline">\(\Sigma\)</span> only affects the level of the value function <span class="math inline">\(\beta_0\)</span></p></li>
+<li><p>No effect on decisions <span class="math inline">\(\alpha^* = \Gamma^{-1} B' (\beta_1 + \beta_2 x)\)</span></p></li>
+<li><p><span class="math inline">\(\implies\)</span> heterogeneity is uninteresting</p></li>
+<li><p>… but this simplification is unnecessary!</p></li>
+</ul>
+</section>
+<section id="solution-map-with-sx" class="slide level2 math-slide two-box risk-slide">
+<h2>Solution Map with <span class="math inline">\(\color{blue}{S(x)}\)</span></h2>
+<div class="columns">
+<div class="column" style="width:47%;">
+<div class="math-box">
+<div class="box-title">
+<p>Step 1: Fix <span class="math inline">\(X(t)\)</span></p>
+</div>
+<p><span class="math display">\[
+\begin{aligned}
+\rho u(x,t) &amp;= -\frac{1}{2}x'Qx - X(t)'\Theta x + H(u_x,x) \\
+&amp;\quad + \frac{1}{2}\operatorname{tr}({\color{blue}{S(x)S(x)'}} u_{xx}) + u_t(x,t)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+H(u_x,x) = -\frac{1}{2}\alpha^{*'}\Gamma\alpha^* + u_x'(B\alpha^* - Ax)
+\]</span></p>
+<p><span class="math display">\[
+\alpha^* = \Gamma^{-1} B' u_x
+\]</span></p>
+<p>Conjecture quadratic solution:</p>
+<p><span class="math display">\[
+u(x,t) = \beta_0(t) + \beta_1(t)'x + \frac{1}{2}x'\beta_2(t)x
+\]</span></p>
+</div>
+</div><div class="column" style="width:53%;">
+<div class="math-box">
+<div class="box-title">
+<p>Step 2: Solve <span class="math inline">\(\beta_2 \rightarrow (\beta_1, X) \rightarrow \beta_0\)</span></p>
+</div>
+<p>Solve <span style="color: blue;">generalized</span> Riccati:</p>
+<p><span class="math display">\[
+0 = Q - \beta_2 B\Gamma^{-1}B'\beta_2 + \beta_2 A + A'\beta_2 + \rho \beta_2 - {\color{blue}{\xi_2(\beta_2)}}
+\]</span></p>
+<p>Solve system:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\begin{bmatrix}
+\dot{\beta}_1 \\
+\dot{X}
+\end{bmatrix}
+&amp;=
+\begin{bmatrix}
+\rho I_n + A' - \beta_2 B\Gamma^{-1}B' &amp; \Theta' \\
+B\Gamma^{-1}B' &amp; B\Gamma^{-1}B'\beta_2 - A
+\end{bmatrix}
+\begin{bmatrix}
+\beta_1 \\
+X
+\end{bmatrix}
+- \begin{bmatrix}
+{\color{blue}{\xi_1(\beta_2)}} \\
+0
+\end{bmatrix}
+\end{aligned}
+\]</span></p>
+<p>Solve ODE:</p>
+<p><span class="math display">\[
+\dot{\beta}_0 = \rho \beta_0 - \frac{1}{2}\beta_1' B\Gamma^{-1}B'\beta_1 - \frac{1}{2}{\color{blue}{\xi_0(\beta_2)}}
+\]</span></p>
+</div>
+</div></div>
+<ul>
+<li><p>Generalize: <span class="math inline">\(dx = (B\alpha - Ax)dt + \color{blue}{S(x)} \, dW\)</span></p></li>
+<li><p>Assume <span class="math inline">\(\color{blue}{S(x)} = S_0 + \color{blue}{S_1} x\)</span>; the HJB will remain quadratic in <span class="math inline">\(x\)</span></p></li>
+<li><p><span class="math inline">\(\frac{1}{2}\operatorname{tr}(\color{blue}{S(x)S(x)'}\beta_2) = \frac{1}{2}x'\color{blue}{\xi_2(\beta_2)}x + \color{blue}{\xi_1(\beta_2)'}x + \frac{1}{2}\color{blue}{\xi_0(\beta_2)}\)</span>, where <span class="math inline">\(\xi_j\)</span> are linear in <span class="math inline">\(\beta_2\)</span></p></li>
+<li><p>So risk now enters <span class="math inline">\(\beta_2\)</span>, then <span class="math inline">\((\beta_1, X)\)</span>, then <span class="math inline">\(\beta_0\)</span></p></li>
+<li><p>Hence risk can affect <span class="math inline">\(\color{blue}{\alpha^*} = \Gamma^{-1} B' \color{blue}{u_x}\)</span>. Success!</p></li>
+</ul>
+<div class="slide-link-row">
+<p><a class="slide-link-button" href="#/a-simple-fix">Derivation details</a></p>
+</div>
+</section>
+<section id="what-other-generalizations-are-valuable" class="slide level2">
+<h2>What Other Generalizations are Valuable?</h2>
+<p>What would it take to solve Aiyagari with a keeping-up-with-the-Joneses incentive?</p>
+<div class="columns">
+<div class="column" style="width:28%;">
+<p><strong>Capital drift</strong></p>
+<p><strong>GE prices</strong></p>
+<p><strong>Period return</strong></p>
+<p><strong>Borrowing constraint</strong></p>
+</div><div class="column" style="width:72%;">
+<p><span class="math inline">\(dk = \big(R(t)k + W(t)e^z - c\big)dt\)</span></p>
+<p><span class="math inline">\(R(t) = \alpha A K(t)^{\alpha - 1} \qquad W(t) = (1-\alpha) A K(t)^{\alpha}\)</span></p>
+<p><span class="math inline">\(u(c, C(t))\)</span></p>
+<p><span class="math inline">\(k \ge 0\)</span></p>
+</div></div>
+<!-- $$ \rho v(k,z,t) = \max_c \,\, u(c, C(t)) + (R(t) k + W(t)e^z - c)v_k + \tfrac{\sigma^2}{2} v_{zz} + v_t $$
+where $R(t) = \alpha A K(t)^{\alpha - 1}$ and $W(t) = (1-\alpha) A K(t)^{\alpha}$ -->
+<!-- how do i add vertical space -->
+<ul>
+<li class="fragment"><p>Aggregate state <span class="math inline">\(X\)</span> needs to enter the drift</p></li>
+<li class="fragment"><p>Aggregate control <span class="math inline">\(C\)</span> needs to enter the period return</p></li>
+<li class="fragment"><p>Allow for finite boundaries (e.g.&nbsp;borrowing constraints, <span class="math inline">\(sS\)</span> regions, irreversibility, etc.)</p></li>
+<li class="fragment"><p><em>Some</em> of these work</p></li>
+</ul>
+</section>
+<section id="solution-map-with-gx" class="slide level2 math-slide two-box risk-slide">
+<h2>Solution Map with <span class="math inline">\(\color{purple}{G X}\)</span> in Drift</h2>
+<div class="columns">
+<div class="column" style="width:47%;">
+<div class="math-box">
+<div class="box-title">
+<p>Step 1: Fix <span class="math inline">\(X(t)\)</span></p>
+</div>
+<p><span class="math display">\[
+\begin{aligned}
+\rho u(x,t) &amp;= -\frac{1}{2}x'Qx - X(t)'\Theta x + H(u_x,x,X) \\
+&amp;\quad + \frac{1}{2}\operatorname{tr}(\Sigma u_{xx}) + u_t(x,t)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+H(u_x,x,X) = -\frac{1}{2}\alpha^{*'}\Gamma\alpha^* + u_x'(B\alpha^* - Ax - {\color{purple}{G X}})
+\]</span></p>
+<p><span class="math display">\[
+\alpha^* = \Gamma^{-1} B' u_x
+\]</span></p>
+<p>Conjecture quadratic solution:</p>
+<p><span class="math display">\[
+u(x,t) = \beta_0(t) + \beta_1(t)'x + \frac{1}{2}x'\beta_2(t)x
+\]</span></p>
+</div>
+</div><div class="column" style="width:53%;">
+<div class="math-box">
+<div class="box-title">
+<p>Step 2: Solve <span class="math inline">\(\beta_2 \rightarrow (\beta_1, X) \rightarrow \beta_0\)</span></p>
+</div>
+<p>Solve Riccati:</p>
+<p><span class="math display">\[
+0 = Q - \beta_2 B\Gamma^{-1}B'\beta_2 + \beta_2 A + A'\beta_2 + \rho \beta_2
+\]</span></p>
+<p>Solve system:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\begin{bmatrix}
+\dot{\beta}_1 \\
+\dot{X}
+\end{bmatrix}
+&amp;=
+\begin{bmatrix}
+\rho I_n + A' - \beta_2 B\Gamma^{-1}B' &amp; \Theta' + {\color{purple}{\beta_2 G}} \\
+B\Gamma^{-1}B' &amp; B\Gamma^{-1}B'\beta_2 - A - {\color{purple}{G}}
+\end{bmatrix}
+\begin{bmatrix}
+\beta_1 \\
+X
+\end{bmatrix}
+\end{aligned}
+\]</span></p>
+<p>Solve ODE:</p>
+<p><span class="math display">\[
+\dot{\beta}_0 = \rho \beta_0 - \frac{1}{2}\beta_1' B\Gamma^{-1}B'\beta_1 - \frac{1}{2}\operatorname{tr}(\Sigma \beta_2) + {\color{purple}{\beta_1' G X}}
+\]</span></p>
+</div>
+</div></div>
+<ul>
+<li><p>Generalize: <span class="math inline">\(dx = (B\alpha - Ax - \color{purple}{G X})dt + \Sigma^{1/2} dW\)</span></p></li>
+<li><p>Optimal decision <span class="math inline">\(\alpha^* = \Gamma^{-1} B'(\beta_1 + \beta_2 x)\)</span> is unchanged</p></li>
+<li><p><span class="math inline">\(\beta_2\)</span> is unchanged, but the <span class="math inline">\((\beta_1, X)\)</span> system gains <span class="math inline">\({\color{purple}{\beta_2 G}}\)</span> and <span class="math inline">\(- {\color{purple}{G}}\)</span>, and <span class="math inline">\(\beta_0\)</span> gains <span class="math inline">\({\color{purple}{\beta_1' G X}}\)</span></p></li>
+</ul>
+</section>
+<section id="solution-map-with-c" class="slide level2 math-slide two-box risk-slide">
+<h2>Solution Map with <span class="math inline">\(\color{green}{C}\)</span> in Period Return</h2>
+<div class="columns">
+<div class="column" style="width:47%;">
+<div class="math-box">
+<div class="box-title">
+<p>Step 1: Fix <span class="math inline">\(X(t)\)</span></p>
+</div>
+<p><span class="math display">\[
+\begin{aligned}
+\rho u(x,t) &amp;= -\frac{1}{2}x'Qx - X(t)'\Theta x + H(u_x,x,\color{green}{C}) \\
+&amp;\quad + \frac{1}{2}\operatorname{tr}(\Sigma u_{xx}) + u_t(x,t)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+H(u_x,x,\color{green}{C}) = -\frac{1}{2}\alpha^{*'}\Gamma\alpha^* - {\color{green}{C'\Upsilon}}\alpha^* + u_x'(B\alpha^* - Ax)
+\]</span></p>
+<p><span class="math display">\[
+\alpha^* = \Gamma^{-1}(B'u_x - {\color{green}{\Upsilon'C}})
+\]</span></p>
+<p>Conjecture quadratic solution:</p>
+<p><span class="math display">\[
+u(x,t) = \beta_0(t) + \beta_1(t)'x + \frac{1}{2}x'\beta_2(t)x
+\]</span></p>
+</div>
+</div><div class="column" style="width:53%;">
+<div class="math-box">
+<div class="box-title">
+<p>Step 2: Solve <span class="math inline">\(\beta_2 \rightarrow (\beta_1, X) \rightarrow \beta_0\)</span></p>
+</div>
+<p>Solve Riccati:</p>
+<p><span class="math display">\[
+0 = Q - \beta_2 B\Gamma^{-1}B'\beta_2 + \beta_2 A + A'\beta_2 + \rho \beta_2
+\]</span></p>
+<p>Solve system:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\begin{bmatrix}
+\dot{\beta}_1 \\
+\dot{X}
+\end{bmatrix}
+&amp;=
+\begin{bmatrix}
+\rho I_n + A' - \beta_2 B\Gamma^{-1}B' + {\color{green}{\beta_2 M_C}} &amp; \Theta' + {\color{green}{\beta_2 M_C \beta_2}} \\
+B\Gamma^{-1}B' - {\color{green}{M_C}} &amp; B\Gamma^{-1}B'\beta_2 - A - {\color{green}{M_C \beta_2}}
+\end{bmatrix}
+\begin{bmatrix}
+\beta_1 \\
+X
+\end{bmatrix}
+\end{aligned}
+\]</span></p>
+<p>Solve ODE:</p>
+<p><span class="math display">\[
+\dot{\beta}_0 = \rho \beta_0 - \frac{1}{2}\beta_1' B\Gamma^{-1}B'\beta_1 - \frac{1}{2}\operatorname{tr}(\Sigma \beta_2)
+\]</span></p>
+</div>
+</div></div>
+<ul>
+<li><p>Generalize the period return to include <span class="math inline">\(-{\color{green}{C'\Upsilon}}\alpha\)</span> where <span class="math inline">\(C\)</span> is the aggregate control: <span class="math display">\[C = \int \alpha(x,t) m(x,t) \, dx\]</span></p></li>
+<li><p><span class="math inline">\(\Upsilon\)</span> represents strategic complementarity between controls</p></li>
+<li><p>Aggregate control solves <span class="math inline">\((\Gamma + \Upsilon')C = B'(\beta_1 + \beta_2 X)\)</span></p></li>
+<li><p>Define <span class="math inline">\({\color{green}{M_C}} \equiv B\Gamma^{-1}\Upsilon'(\Gamma + \Upsilon')^{-1}B'\)</span>, entering <span class="math inline">\((\beta_1,X)\)</span> coefficients (requires invertibility)</p></li>
+</ul>
+</section>
+<section id="why-control-complementarity-does-not-move-x" class="slide level2">
+<h2><span class="math inline">\(\color{green}{C}\)</span>-Complementarity is not Sufficient for Persistence</h2>
+<!-- In the general perfect-aggregation system, let $R \equiv B\Gamma^{-1}B'$ and define -->
+<p>Rearrange the <span class="math inline">\((\beta_1,X)\)</span> system, defining <span class="math inline">\(y \equiv \beta_1 + \beta_2 X\)</span>:</p>
+<!-- Using the Riccati equation for $\beta_2$, the $(\beta_1,X)$ system with $\color{green}{M_C}$ can be rewritten as -->
+<!-- $$
+\dot y = (\rho I + A')y + (Q + \Theta')X
+$$
+
+$$
+\dot X = (B\Gamma^{-1}B' - \color{green}{M_C})y - AX
+$$ -->
+<!-- The transformed system becomes -->
+<p><span class="math display">\[
+\begin{bmatrix}
+\dot y \\
+\dot X
+\end{bmatrix}
+=
+\begin{bmatrix}
+\rho I + A' &amp; Q + \Theta' \\
+B\Gamma^{-1}B' - \color{green}{M_C} &amp; -A
+\end{bmatrix}
+\begin{bmatrix}
+y \\
+X
+\end{bmatrix}
+\]</span></p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(M_C\)</span> drops out of most blocks</p></li>
+<li class="fragment"><p>If <span class="math inline">\(Q + \Theta' = 0\)</span> &amp; the system is block triangular, so stable eigenvalues are independent of <span class="math inline">\(\color{green}{M_C}\)</span> and hence <span class="math inline">\(\color{green}{\Upsilon}\)</span></p></li>
+<li class="fragment"><p>… in which case <span class="math inline">\(\color{green}{\Upsilon}\)</span> changes the value function but not the aggregate path <span class="math inline">\(X(t)\)</span></p></li>
+<li class="fragment"><p>Therefore, for strategic complementarity among controls to matter, states must enter the period return (else <span class="math inline">\(Q=0\)</span>, <span class="math inline">\(\Theta=0\)</span>)… <strong>why??</strong></p></li>
+<li class="fragment"><p><span class="math inline">\(\implies\)</span> I’ll rewrite Aiyagari utility to depend on relative wealth: <span class="math inline">\(u(c,C)\to u(c,k,K)\)</span></p></li>
+</ul>
+</section>
+<section id="finite-boundaries" class="slide level2">
+<h2>Finite Boundaries</h2>
+<ul>
+<li class="fragment"><p>… I couldn’t get it to work.</p></li>
+<li class="fragment"><p>How to embed in LQ framework while maintaining finite-dimensional state space?</p></li>
+<li class="fragment"><p>Density at the boundary enters the law of motion for <span class="math inline">\(X\)</span>, and evolution of density at the boundary requires solving the entire PDE</p></li>
+<li class="fragment"><p>Can still linearize the KFE to make this tractable, but state space is infinite… at which point, we might as well just solve the fully linearized MFG (a la Alvarez-Lippi-Souganidis)</p></li>
+<li class="fragment"><p><span class="math inline">\(\implies\)</span> I’ll transform the Aiyagari state variable to be unbounded (e.g.&nbsp;<span class="math inline">\(\log(k)\)</span>)</p></li>
+</ul>
+<!-- - Generalize the HJB to hold on domain $\mathcal{X}$
+
+- Restrictions: $\mathcal{X}$ must be *fixed* and *reflecting*, i.e. with boundary condition 
+$$\mathcal{J}(x,t) \cdot \hat{n}(x) = 0 \quad \text{for } x \in \partial \mathcal{X}$$
+where $\mathcal{J}(x,t) = \{(B\alpha(x,t) - Ax)m(x,t) - \frac{1}{2}\Sigma m_x(x,t)\}$ denotes the probability flux.
+
+- This preserves linearity of the $(\beta_1, X)$ system (perfect aggregation still holds)
+$$\dot{X}(t) = \int_{\mathcal{X}} x m_t(x,t) \, dx = \int_{\mathcal{X}} x \underbrace{(-\nabla \cdot \mathcal{J}(x,t))}_{KFE} \, dx $$
+$$ = \underbrace{\int_{\partial \mathcal{X}} x \mathcal{J}(x,t) \cdot \hat{n}(x) \, dS}_{0 \text{ by reflecting BC}} - \int_{\mathcal{X}} \mathcal{J}(x,t) \, dx $$ -->
+</section>
+<section id="aiyagari-household-problem" class="slide level2 math-slide detail-slide">
+<h2>Aiyagari Mean Field Game</h2>
+<p>Take household states <span class="math inline">\((k,z)\)</span> with aggregate capital <span class="math inline">\(K(t)\)</span>, where <span class="math inline">\(z\)</span> is log labor productivity:</p>
+<p><span class="math display">\[
+dk = \big(R(t)k + W(t)e^z - c\big)dt
+\qquad
+dz = -\phi z\,dt + \sigma\,dW
+\]</span></p>
+<p>Impose the borrowing constraint <span class="math inline">\(k \ge 0\)</span>, and let <span class="math inline">\(\mathcal C(k,z,t)\)</span> denote consumption choices that keep the controlled path in the feasible set.</p>
+<p>The Hamiltonian is a function of <span class="math inline">\((p,k,z,t)\)</span>, with utility</p>
+<p><span class="math display">\[
+u(c,k,K(t)) = \frac{c^{1-\gamma}}{1-\gamma} + f(k,K(t))
+\]</span></p>
+<p>where <span class="math inline">\(f\)</span> is smooth near <span class="math inline">\((\bar k,\bar K)\)</span> and captures status or other aggregate-wealth effects</p>
+<p><span class="math display">\[
+H(p,k,z,t) = \max_{c \in \mathcal C(k,z,t)} \left\{ u(c,k,K(t)) + p\big(R(t)k + W(t)e^z - c\big) \right\}
+\]</span></p>
+<p>with <span class="math inline">\(R(K) = \alpha A K^{\alpha-1}\)</span> and <span class="math inline">\(W(K) = (1-\alpha) A K^\alpha\)</span>. The HJB and KFE are</p>
+<p><span class="math display">\[
+\rho v(k,z,t) = H(v_k,k,z,t) - \phi z v_z(k,z,t) + \frac{\sigma^2}{2}v_{zz}(k,z,t) + v_t(k,z,t)
+\]</span></p>
+<p><span class="math display">\[
+m_t = -\partial_k\left(H_p(v_k,k,z,t)m\right) + \partial_z\left(\phi z m\right) + \frac{\sigma^2}{2}m_{zz}
+\]</span></p>
+<p><span class="math display">\[
+K(t) = \int_{k,z} k\,m(k,z,t)\,dk\,dz
+\]</span></p>
+<div class="slide-link-row">
+<p><a class="slide-link-button" href="#/approximating-the-aiyagari-model">Appendix: LQ approximation</a></p>
+</div>
+<!-- At the boundary $k=0$, admissible controls satisfy the state-constraint condition that the drift cannot point out of the feasible set. -->
+</section>
+<section id="aiyagari-k-path" class="slide level2">
+<h2>State Complementarity and the Path of <span class="math inline">\(K\)</span></h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<ul>
+<li><p>Initialize capital 10% above steady state</p></li>
+<li><p>Vary the strategic complementary <span class="math inline">\(\Theta_{Kk} = - \bar{K}^2 f_{kK}\)</span></p></li>
+<li><p>Thus <span class="math inline">\(f_{kK} &gt; 0\)</span> <span class="math inline">\(\implies \Theta_{Kk} &lt; 0\)</span> <span class="math inline">\(\implies\)</span> complementarity</p></li>
+<li><p><strong>More complementarity</strong> <span class="math inline">\(\implies\)</span> <strong>slower transition!</strong></p></li>
+</ul>
+</div><div class="column fragment" style="width:70%;">
+<p><img data-src="aiyagari_K_path_trace.gif" style="width:100.0%" alt="Animated tracing of aggregate capital paths across the configured Theta_{Kk} comparison cases, ending at the completed IRF plot"></p>
+</div></div>
+<!-- ## State Complementarity and the Path of $K$
+
+![](aiyagari_K_path_trace_m20_0_20_t15.gif){fig-alt="Animated tracing of aggregate capital paths for Theta_{Kk}=10, 0, and -10, ending at the completed IRF plot" width="88%"}
+ -->
+</section>
+<section id="aiyagari-density-path" class="slide level2 math-slide">
+<h2>State Complementarity and the Density Path</h2>
+<ul>
+<li><p>Shock: increase all households’ wealth by 10%</p></li>
+<li><p>Distribution <span class="math inline">\(m(\hat{k}, z)\)</span> is Gaussian; I plot the marginal density of <span class="math inline">\(k = \bar{k}e^{\hat{k}}\)</span> <a class="slide-link-button inline-link-button" href="#/appendix-aiyagari-joint-density-log">Appendix: joint density in log space</a></p></li>
+</ul>
+<div class="density-figure">
+<p><img src="aiyagari_distribution_comparison_levels_start.png" alt="First frame of the marginal density comparison of k across the configured Theta_{Kk} comparison cases after a 10 percent rightward capital shift" class="density-image" style="--density-figure-max-height: 64vh;"></p>
+</div>
+</section>
+<section id="state-complementarity-and-the-density-path" class="slide level2 math-slide">
+<h2>State Complementarity and the Density Path</h2>
+<ul>
+<li><p>Shock: increase all household’s wealth by 10%</p></li>
+<li><p>Distribution <span class="math inline">\(m(\hat{k}, z)\)</span> is Gaussian; I plot the marginal density of <span class="math inline">\(k = \bar{k}e^{\hat{k}}\)</span> <a class="slide-link-button inline-link-button" href="#/appendix-aiyagari-joint-density-log">Appendix: joint density in log space</a></p></li>
+</ul>
+<div class="density-figure">
+<p><img src="aiyagari_distribution_comparison_levels.gif" alt="Animated comparison of the marginal density of k across the configured Theta_{Kk} comparison cases after a 10 percent rightward capital shift" class="density-image" style="--density-figure-max-height: 64vh;"></p>
+</div>
+</section>
+<section id="conclusions" class="slide level2">
+<h2>Conclusions</h2>
+<ul>
+<li class="fragment"><p>Strategic Complementarity = Persistence</p>
+<ul>
+<li class="fragment">Crucially: complementarity among states (why not controls? dynamic vs static decision?)</li>
+</ul></li>
+<li class="fragment"><p>Strategic Complementarity = Dynamic Externality</p>
+<ul>
+<li class="fragment">Could use more discussion/intuition. I admit I don’t 100% understand why dynamic externalities are so different than static externalities. (missing market?)</li>
+</ul></li>
+<li class="fragment"><p>Linear-quadratic structure gives a clean solution + theorems</p>
+<ul>
+<li class="fragment">boundaryless state space <span class="math inline">\(\implies\)</span> perfect aggregation <span class="math inline">\(\implies\)</span> finite-dimensional</li>
+</ul></li>
+<li class="fragment"><p>Much more in the paper! (higher moments, identification arguments, etc.)</p></li>
+<li class="fragment"><p>My main suggestions:</p>
+<ul>
+<li class="fragment">Generalize in easy + valuable ways</li>
+<li class="fragment">More examples would be nice (probably not Aiyagari)</li>
+</ul></li>
+</ul>
+</section>
+<section id="additional-homework-problems" class="slide level2 smaller">
+<h2>Additional Homework Problems</h2>
+<ol type="1">
+<li><p>Why is the constant solution for <span class="math inline">\(\beta_2(t)\)</span> the right solution? I follow the uniqueness argument, but would like intuition. What goes wrong with non-constant <span class="math inline">\(\beta_2(t)\)</span>?</p></li>
+<li><p>Maybe include the quadratic term for X; it doesn’t affect decisions but does affect <span class="math inline">\(\beta_0(t)\)</span> and hence welfare analysis</p></li>
+<li><p>Please provide a formalization of the approximation</p></li>
+<li><p>Computationally, how does your LQ approximation compare to formal linearization (e.g.&nbsp;Alvarez-Lippi-Souganidis 2023)?</p>
+<ol type="a">
+<li>We know what the correct solution for small shocks is. Is the LQ similar?</li>
+<li>Is there a shock size threshold above which LQ is more accurate than linearization?</li>
+</ol></li>
+<li><p>Perfect aggregation proof can be much much simpler. Integrate the <span class="math inline">\(x\partial_t m\)</span> and use integration by parts.</p></li>
+<li><p>The investment example is a clear application. It’s almost too obvious an example! Adding a second, less obvious example would help sell the usefulness of the method.</p></li>
+<li><p>The explosive complementarity case looks like endgoenous growth. A feature of a simple capital investment model even without LQ approximation (we’ll depart from steady state quickly.) Can you connect to that? (Surely someone wrote down such a model in the 1980s?)</p></li>
+<li><p>I’m not sure it’s appropriate to conclude there there is “no equilibrium” above <span class="math inline">\(\theta^*\)</span> threshold. There is no equilibrium with finite value function, but there is still a well-determined choice <span class="math inline">\(\alpha\)</span> and explosive path for <span class="math inline">\(X\)</span>, no? Certainly your state is correct given your equilibrium definition, but perhaps equilibrium could be defined more broadly. Analogously: a dynamically inefficient equilibrium is still an equilibrium even though certain objects are infinite.</p></li>
+<li><p>Are propositions 21-23 interesting? (Convince me!) Do they survive the generalizations?</p></li>
+</ol>
+</section>
+<section id="a-simple-fix" class="slide level2 math-slide detail-slide">
+<h2>Appendix: Non-Constant Risk</h2>
+<div class="slide-link-row back-link">
+<p><a class="slide-link-button" href="#/solution-map-with-sx">Back to solution map</a></p>
+</div>
+<ul>
+<li>Use column-wise affine diffusion loadings:</li>
+</ul>
+<p><span class="math display">\[
+dx = (B\alpha - Ax)dt + S(x) \, dW
+\]</span></p>
+<ul>
+<li><p>Write <span class="math inline">\(S(x) = \big[s_1(x) \, \cdots \, s_m(x)\big]\)</span> with <span class="math inline">\(s_j(x) = s_{0j} + S_j x\)</span></p></li>
+<li><p>Here <span class="math inline">\(W \in \mathbb{R}^m\)</span>, <span class="math inline">\(s_j(x), s_{0j} \in \mathbb{R}^n\)</span>, and <span class="math inline">\(S_j \in \mathbb{R}^{n \times n}\)</span>, so <span class="math inline">\(\Sigma(x) = S(x)S(x)'\)</span></p></li>
+</ul>
+<p><span class="math display">\[
+\frac{1}{2}\operatorname{tr}(\Sigma(x)u_{xx}) = \frac{1}{2}\operatorname{tr}(S(x)'\beta_2 S(x)) = \frac{1}{2}\sum_{j=1}^m s_j(x)'\beta_2 s_j(x)
+\]</span></p>
+<ul>
+<li>For the quadratic ansatz, take <span class="math inline">\(\beta_2 = \beta_2'\)</span> without loss and define</li>
+</ul>
+<p><span class="math display">\[
+\xi_2(\beta_2) \equiv \sum_{j=1}^m S_j'\beta_2 S_j, \qquad \xi_1(\beta_2) \equiv \sum_{j=1}^m S_j'\beta_2 s_{0j}, \qquad \xi_0(\beta_2) \equiv \sum_{j=1}^m s_{0j}'\beta_2 s_{0j}
+\]</span></p>
+<p><span class="math display">\[
+\frac{1}{2}\operatorname{tr}(\Sigma(x)\beta_2) = \frac{1}{2}x'\xi_2(\beta_2)x + \xi_1(\beta_2)'x + \frac{1}{2}\xi_0(\beta_2)
+\]</span></p>
+<ul>
+<li>So matrix-valued state-dependent risk adds explicit quadratic, linear, and constant terms to the HJB</li>
+</ul>
+</section>
+<section id="approximating-the-aiyagari-model" class="slide level2 math-slide">
+<h2>Appendix: Approximating the Aiyagari Model 1</h2>
+<!-- <div class="slide-link-row back-link">
+<a class="slide-link-button" href="#/aiyagari-household-problem">Back to Aiyagari MFG</a>
+</div> -->
+<ul>
+<li><p>Follow the example: set <span class="math inline">\(\sigma = 0\)</span> and <span class="math inline">\(z = 0\)</span>, then solve the deterministic steady state <span class="math inline">\((\bar k, \bar K, \bar c)\)</span></p></li>
+<li><p>Remove the borrowing boundary by working with <span class="math inline">\(\hat{k} \equiv \log(k/\bar k)\)</span> and <span class="math inline">\(x \equiv \begin{bmatrix} \hat{k} \\ z \end{bmatrix}\)</span>, and write the aggregate state as <span class="math inline">\(X \equiv \int x\,m(x,t)\,dx = \begin{bmatrix} X_k \\ X_z \end{bmatrix}\)</span> with <span class="math inline">\(X_k = \log(K/\bar K)\)</span></p></li>
+<li><p>First-order expand <span class="math inline">\(R(K)\)</span> and <span class="math inline">\(W(K)\)</span> around <span class="math inline">\(\bar K\)</span>, and second-order expand <span class="math inline">\(u(c,k,K)\)</span> and the budget drift around <span class="math inline">\((\bar k, \bar K, \bar c, 0)\)</span></p></li>
+<li><p>Since <span class="math inline">\(z\)</span> is log productivity, <span class="math inline">\(e^z = 1 + z + o(z)\)</span> around <span class="math inline">\(z = 0\)</span>, so the linearized labor-income loading is still <span class="math inline">\(\bar W z\)</span></p></li>
+<li><p>Define the linearized control as <span class="math inline">\(\alpha \equiv (\bar c - c)/\bar k\)</span>. Then the stacked state law takes the Alvarez form</p></li>
+</ul>
+<p><span class="math display">\[
+dx \approx (B\alpha - A x - G X)dt + \Sigma^{1/2} dW
+\]</span></p>
+<ul>
+<li><p>No diffusion approximation is needed here: the <span class="math inline">\(z\)</span> process already has constant variance <span class="math inline">\(\sigma^2\)</span></p></li>
+<li><p>The next slide writes the corresponding HJB, Hamiltonian, and policy rule in the paper’s notation</p></li>
+</ul>
+</section>
+<section id="aiyagari-lq-map" class="slide level2 math-slide detail-slide">
+<h2>Appendix: Approximating the Aiyagari Model 2</h2>
+<!-- <div class="slide-link-row back-link">
+<a class="slide-link-button" href="#/aiyagari-household-problem">Back to Aiyagari MFG</a>
+</div> -->
+<p>Let <span class="math inline">\(\bar R \equiv R(\bar K)\)</span>, <span class="math inline">\(\bar W \equiv W(\bar K)\)</span>, <span class="math inline">\(\hat{k} \equiv \log(k/\bar k)\)</span>, <span class="math inline">\(x \equiv \begin{bmatrix} \hat{k} \\ z \end{bmatrix}\)</span>, <!-- $X \equiv \begin{bmatrix} X_k \\ X_z \end{bmatrix}$ with $X_k = \log(K/\bar K)$, --> <span class="math inline">\(\alpha \equiv (\bar c - c)/\bar k\)</span> and write <span class="math inline">\(f_k, f_{kk}, f_{kK}\)</span> for derivatives of <span class="math inline">\(f\)</span> at <span class="math inline">\((\bar k,\bar K)\)</span>.</p>
+<p><span class="math display">\[
+dx = (B\alpha - A x - G X)dt + \Sigma^{1/2} dW
+\]</span></p>
+<p><span class="math display">\[
+B = \begin{bmatrix} 1 \\ 0 \end{bmatrix} \qquad
+A = \begin{bmatrix} -\bar R &amp; -\bar W/\bar k \\ 0 &amp; \phi \end{bmatrix} \qquad
+G = \begin{bmatrix} -\bar K\left(R_K(\bar K) + W_K(\bar K)/\bar k\right) &amp; 0 \\ 0 &amp; 0 \end{bmatrix} \qquad
+\Sigma = \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; \sigma^2 \end{bmatrix}
+\]</span></p>
+<p>With <span class="math inline">\(u(c,k,K) = \frac{c^{1-\gamma}}{1-\gamma} + f(k,K)\)</span> and <span class="math inline">\(k = \bar k e^{\hat{k}}, K = \bar K e^{X_k}\)</span>,</p>
+<p><span class="math display">\[
+f(k,K) \approx \text{const} + \frac{1}{2}\big(\bar k f_k + \bar k^2 f_{kk}\big)\hat{k}^2 + \bar k \bar K f_{kK}\hat{k} X_k
+\]</span></p>
+<p>up to terms that are linear in <span class="math inline">\(x\)</span> or depend only on <span class="math inline">\(X\)</span></p>
+<p><span class="math display">\[
+Q = \begin{bmatrix} -\big(\bar k f_k + \bar k^2 f_{kk}\big) &amp; 0 \\ 0 &amp; 0 \end{bmatrix}, \qquad
+\Theta = \begin{bmatrix} -\bar k \bar K f_{kK} &amp; 0 \\ 0 &amp; 0 \end{bmatrix}, \qquad
+\Gamma = \gamma \bar k^2 \bar c^{-1-\gamma}
+\]</span></p>
+<p>The mixed derivative <span class="math inline">\(f_{kK}\)</span> is what feeds the Alvarez coupling matrix <span class="math inline">\(\Theta\)</span>; pure <span class="math inline">\(K\)</span> terms only shift the scalar part of the value function</p>
+<p><span class="math display">\[
+\rho u(x,t) = -\frac{1}{2}x'Qx - X(t)'\Theta x + H(u_x,x,X(t)) + \frac{1}{2}\operatorname{tr}(\Sigma u_{xx}) + u_t(x,t)
+\]</span></p>
+<p><span class="math display">\[
+H(p,x,X) = \max_\alpha \left\{-\frac{1}{2}\Gamma\alpha^2 + p'(B\alpha - A x - G X)\right\}
+\]</span></p>
+<p><span class="math display">\[
+\alpha^* = \Gamma^{-1} B' p, \qquad
+u(x,t) = \beta_0(t) + \beta_1(t)'x + \frac{1}{2}x'\beta_2 x
+\]</span></p>
+<p>Aggregate object: <span class="math inline">\(X(t) = \int x\,m(x,t)\,dx\)</span>, so <span class="math inline">\(X_k(t) = e_1'X(t)\)</span>.</p>
+</section>
+<section id="aiyagari-kfe-solution" class="slide level2 math-slide detail-slide">
+<h2>Appendix: Linear KFE for Aiyagari</h2>
+<p>With <span class="math inline">\(\alpha^*(x,t) = \Gamma^{-1} B'\big(\beta_1(t) + \beta_2 x\big)\)</span> the state follows <span class="math display">\[
+dx = \big(Mx + b(t)\big)dt + \Sigma^{1/2} dW
+\]</span> <span class="math display">\[
+M \equiv B\Gamma^{-1}B'\beta_2 - A, \qquad b(t) \equiv B\Gamma^{-1}B'\beta_1(t) - G X(t)
+\]</span></p>
+<p>so the KFE is</p>
+<p><span class="math display">\[
+m_t(x,t) = -\nabla \cdot \big((Mx + b(t))m(x,t)\big) + \frac{1}{2}\operatorname{tr}\big(\Sigma m_{xx}(x,t)\big)
+\]</span></p>
+<!-- In Aiyagari $\Sigma = \operatorname{diag}(0,\sigma^2)$, so only the $z$ coordinate diffuses:
+
+$$
+m_t(x,t) = -\nabla \cdot \big((Mx + b(t))m(x,t)\big) + \frac{\sigma^2}{2}m_{zz}(x,t)
+$$ -->
+<p>For arbitrary initial density <span class="math inline">\(m_0(x)\)</span>, the solution is</p>
+<p><span class="math display">\[
+m(x,t) = \int_{\mathbb{R}^2} \mathcal{G}(x,y,t)m_0(y)\,dy
+\]</span></p>
+<p>Here <span class="math inline">\(\mathcal{G}(x,y,t)\)</span> is the Green’s function, that is, the conditional density of <span class="math inline">\(x_t\)</span> at <span class="math inline">\(x\)</span> given <span class="math inline">\(x_0 = y\)</span>. For each fixed <span class="math inline">\(t &gt; 0\)</span> and <span class="math inline">\(y\)</span>, it is Gaussian in <span class="math inline">\(x\)</span> with mean <span class="math inline">\(\mu(t,y)\)</span> and covariance <span class="math inline">\(V_t\)</span>:</p>
+<p><span class="math display">\[
+\mathcal{G}(x,y,t) = \frac{1}{2\pi \det(V_t)^{1/2}} \exp\!\left(-\frac{1}{2}(x-\mu(t,y))'V_t^{-1}(x-\mu(t,y))\right)
+\]</span></p>
+<p><span class="math display">\[
+\mu(t,y) \equiv e^{Mt}y + \int_0^t e^{M(t-s)}b(s)\,ds, \qquad V_t = \int_0^t e^{M(t-s)}\Sigma e^{M(t-s)'}\,ds
+\]</span></p>
+<!-- - In operator language, the map $m_0 \mapsto m(\cdot,t)$ is the Ornstein-Uhlenbeck semigroup -->
+<!-- - If $m_0$ is Gaussian, then $m(\cdot,t)$ stays Gaussian  -->
+<div class="slide-link-row back-link">
+<p><a class="slide-link-button" href="#/aiyagari-household-problem">Back to Aiyagari MFG</a></p>
+</div>
+</section>
+<section id="appendix-aiyagari-joint-density-log" class="slide level2 math-slide detail-slide">
+<h2>Appendix: Aiyagari Dynamic Distribution</h2>
+<div class="slide-link-row back-link">
+<p><a class="slide-link-button" href="#/aiyagari-density-path">Back to marginal density</a></p>
+</div>
+<ul>
+<li>Dynamic joint distribution <span class="math inline">\(m(\hat{k}, z)\)</span> after the 10% capital increase.</li>
+</ul>
+<!-- - The three panels compare $\Theta_{Kk} = -20$, $0$, and $20$ on the same clock and with the same color scale. -->
+<ul>
+<li>The white <span class="math inline">\(\times\)</span> marks the steady-state mean <span class="math inline">\((0,0)\)</span>, and the white dot marks the current center <span class="math inline">\((\hat{K}, Z)\)</span>.</li>
+</ul>
+<!-- <div class="slide-link-row">
+<a class="slide-link-button" href="#/appendix-aiyagari-covariance-sign">Why is corr$(\hat{k}, z)$ negative?</a>
+</div> -->
+<ul>
+<li><span class="math inline">\(Corr(\hat{k}, z)&lt;0\)</span> if <span class="math inline">\(\bar{R} &gt; \rho + \phi\)</span>: as <span class="math inline">\(z\)</span> approaches a random walk (<span class="math inline">\(\phi \to 0\)</span>), correlation with wealth decreases</li>
+</ul>
+
+<!-- 
+## Appendix: Why is $\operatorname{corr}(\hat{k}, z) < 0$? {#appendix-aiyagari-covariance-sign .math-slide .detail-slide}
+
+<div class="slide-link-row back-link">
+<a class="slide-link-button" href="#/appendix-aiyagari-joint-density-log">Back to joint density</a>
+</div>
+
+:::: {.columns}
+::: {.column width="56%"}
+- With $x = (\hat{k}, z)'$, the closed-loop law is $dx = (Mx + b(t))dt + \Sigma^{1/2} dW$
+
+- In the current $Q_{kk} = 0$ calibration,
+
+$$
+M =
+\begin{bmatrix}
+a & c \\
+0 & -\phi
+\end{bmatrix},
+\qquad
+c \equiv \Gamma^{-1}\beta_{2,12} + \bar W / \bar k
+$$
+
+- The stationary covariance $P$ solves
+
+$$
+MP + PM' + \Sigma = 0
+$$
+
+- Its off-diagonal entry satisfies
+
+$$
+P_{12} = -\frac{c}{a - \phi} P_{22}
+$$
+
+- Stability implies $a < 0$, so $a - \phi < 0$ and $\operatorname{sign}(P_{12}) = \operatorname{sign}(c)$
+:::
+
+::: {.column width="44%"}
+- Higher $z$ raises labor income, which pushes $\hat{k}$ up directly
+
+- But higher $z$ also raises desired consumption, and since $\alpha \equiv (\bar c - c)/\bar k$, that lowers $\alpha$ and pushes $\hat{k}$ down
+
+- In this calibration the policy effect dominates
+
+$$
+c = \bar W \frac{\rho - \bar R + \phi}{\bar R + \phi}
+$$
+
+- So $P_{12} < 0$ iff $\bar R > \rho + \phi$
+
+- With $(\rho, \phi, \bar R) = (0.04, 0.10, 0.36)$, the covariance is negative
+
+- To flip it positive in this LQ approximation: raise $\phi$ above $0.32$, raise $\rho$ above $0.26$, or lower $\bar R$ below $0.14$
+
+- In the current $Q_{kk} = 0$ case, $\gamma$ affects scale but not this sign threshold
+:::
+:::: -->
+
+<img data-src="aiyagari_distribution_heatmap_comparison_logs.gif" style="width:100.0%" alt="Animated comparison of the joint density heatmap in log-space across the configured Theta_{Kk} comparison cases after a 10 percent rightward capital shift" class="r-stretch"></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="discussion-slides_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="discussion-slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="discussion-slides_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="discussion-slides_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="discussion-slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="discussion-slides_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="discussion-slides_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="discussion-slides_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="discussion-slides_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="discussion-slides_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 3.0e-2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
