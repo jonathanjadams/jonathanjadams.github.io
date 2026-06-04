@@ -986,10 +986,19 @@ for idx = 1:numel(scenarios)
     peak_density = max(peak_density, scenarios(idx).distribution.joint_density_peak);
 end
 
+
+
+
+
+
 figure_position = [100, 100, max(1400, 460 * numel(scenarios)), 560];
 fig = figure('Visible', visible_state, 'Color', 'w', 'Name', 'Aiyagari Joint Density Heatmap', ...
     'Position', figure_position);
 temp_frame_path = [tempname, '.png'];
+
+% Create a reference frame to establish consistent GIF dimensions and color map
+reference_color_map = [];
+reference_frame_size = [];
 
 for frame_idx = 1:numel(frame_times)
     t_now = frame_times(frame_idx);
@@ -1028,16 +1037,38 @@ for frame_idx = 1:numel(frame_times)
         clim([0, 1.02 * peak_density]);
     end
 
-    sgtitle(sprintf('Joint density of (khat, z): 10%% initial shift, t = %.2f', t_now));
+
+
+
+
+
+
+
+
+
+
+
+        sgtitle(sprintf('Joint density of (khat, z): 10%% initial shift, t = %.2f', t_now));
     exportgraphics(fig, temp_frame_path, 'Resolution', results.params.plot_resolution);
 
     rgb_frame = imread(temp_frame_path);
-    [indexed_frame, color_map] = rgb2ind(rgb_frame, 256);
+    
     if frame_idx == 1
-        imwrite(indexed_frame, color_map, animation_path, 'gif', 'LoopCount', 0, ...
+        % First frame: create the reference color map and store frame size
+        [indexed_frame, reference_color_map] = rgb2ind(rgb_frame, 256, 'nodither');
+        reference_frame_size = size(indexed_frame);
+        % Start the GIF
+        imwrite(indexed_frame, reference_color_map, animation_path, 'gif', 'LoopCount', 0, ...
             'DelayTime', results.params.distribution_frame_delay);
     else
-        imwrite(indexed_frame, color_map, animation_path, 'gif', 'WriteMode', 'append', ...
+        % Subsequent frames: use the reference color map for consistency
+        indexed_frame = rgb2ind(rgb_frame, reference_color_map, 'nodither');
+        % Ensure frame size matches
+        if ~isequal(size(indexed_frame), reference_frame_size)
+            warning('Frame %d has different dimensions than frame 1. Resizing.', frame_idx);
+            indexed_frame = imresize(indexed_frame, reference_frame_size, 'nearest');
+        end
+        imwrite(indexed_frame, reference_color_map, animation_path, 'gif', 'WriteMode', 'append', ...
             'DelayTime', results.params.distribution_frame_delay);
     end
 end
