@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DYRNT World Cup 2026</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+  <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
@@ -28,7 +31,7 @@
       --radius-md: 18px;
       --radius-sm: 12px;
       --bracket-gap: 18px;
-      --bracket-row-size: 42px;
+      --bracket-row-size: 52px;
       --bracket-connector-size: 18px;
     }
 
@@ -42,10 +45,12 @@
       color: var(--ink);
       font-family: "Space Grotesk", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(88, 186, 255, 0.18), transparent 24%),
-        radial-gradient(circle at top right, rgba(255, 107, 95, 0.14), transparent 26%),
-        radial-gradient(circle at 50% 0%, rgba(240, 181, 88, 0.12), transparent 30%),
+        radial-gradient(circle 900px at top left, rgba(88, 186, 255, 0.18), transparent),
+        radial-gradient(circle 980px at top right, rgba(255, 107, 95, 0.14), transparent),
+        radial-gradient(circle 1060px at 50% 0%, rgba(240, 181, 88, 0.12), transparent),
         linear-gradient(145deg, var(--bg) 0%, var(--bg-deep) 100%);
+      background-attachment: fixed;
+      background-color: var(--bg-deep);
     }
 
     .page {
@@ -132,8 +137,21 @@
       margin: 0;
     }
 
-    h1 {
+    .hero-title {
       margin-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: clamp(12px, 2vw, 22px);
+    }
+
+    .hero-logo {
+      height: clamp(56px, 9vw, 104px);
+      width: auto;
+      flex-shrink: 0;
+    }
+
+    h1 {
+      margin-top: 0;
       max-width: none;
       font-size: clamp(3rem, 8vw, 5.6rem);
       line-height: 0.92;
@@ -174,6 +192,38 @@
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
+    }
+
+    .status-stack {
+      position: relative;
+    }
+
+    /* Countdown floats above the status row so it never pushes the layout down */
+    .refresh-countdown {
+      position: absolute;
+      bottom: calc(100% + 5px);
+      right: 0;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .refresh-countdown:empty {
+      display: none;
+    }
+
+    .refresh-countdown::before {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      margin-right: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+      vertical-align: middle;
     }
 
     .status-inline {
@@ -258,26 +308,47 @@
     }
 
     .team-card {
+      --team-accent: var(--neutral);
+      --team-accent-rgb: 112, 130, 149;
+      position: relative;
+      overflow: hidden;
       padding: 18px;
       border-radius: var(--radius-md);
       border: 1px solid var(--line);
       background: var(--panel-strong);
     }
 
+    /* Top accent hairline */
+    .team-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--team-accent), transparent);
+      opacity: 0.65;
+    }
+
     .team-card[data-team="red"] {
+      --team-accent: var(--red);
+      --team-accent-rgb: 255, 107, 95;
       box-shadow: inset 0 0 0 1px rgba(255, 107, 95, 0.16);
     }
 
     .team-card[data-team="blue"] {
+      --team-accent: var(--blue);
+      --team-accent-rgb: 88, 186, 255;
       box-shadow: inset 0 0 0 1px rgba(88, 186, 255, 0.16);
     }
 
     .team-card-head {
+      position: relative;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 14px;
       margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(157, 185, 214, 0.12);
     }
 
     .team-label {
@@ -326,12 +397,19 @@
 
     .team-points {
       color: var(--ink);
+      border-color: rgba(var(--team-accent-rgb), 0.32);
+      background: rgba(var(--team-accent-rgb), 0.1);
+      font-weight: 600;
     }
 
     .team-table {
       width: 100%;
       min-width: 0;
-      border-collapse: collapse;
+      /* separate (not collapse) so a row highlight can paint on the <tr> as one
+         continuous rectangle — collapse forces per-cell painting, which made the
+         hover look uneven depending on which cell the cursor was over. */
+      border-collapse: separate;
+      border-spacing: 0;
     }
 
     .team-table th,
@@ -355,13 +433,72 @@
     .team-table td:nth-child(2),
     .team-table th:nth-child(3),
     .team-table td:nth-child(3) {
-      text-align: right;
       width: 1%;
       white-space: nowrap;
     }
 
+    /* Record: right-aligned number */
+    .team-table th:nth-child(2),
+    .team-table td:nth-child(2) {
+      text-align: right;
+    }
+
+    /* Status: header centered above its chip, with breathing room from Record */
+    .team-table th:nth-child(3),
+    .team-table td:nth-child(3) {
+      text-align: center;
+      padding-left: 30px;
+    }
+
+    .team-country-row {
+      animation: row-rise 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: calc(var(--i, 0) * 65ms);
+      transition: background-color 150ms ease;
+    }
+
+    /* Highlight the whole row as ONE element — uniform regardless of cursor position. */
+    .team-country-row:hover {
+      background-color: rgba(var(--team-accent-rgb), 0.09);
+    }
+
+    .team-country-row:hover .team-country-name {
+      color: var(--ink);
+    }
+
+    .team-country-name::before {
+      transition: box-shadow 180ms ease;
+    }
+
+    .team-country-row.is-champion .team-country-name::before {
+      box-shadow: 0 0 0 3px rgba(240, 181, 88, 0.18);
+    }
+
+    .team-country-row.is-alive .team-country-name::before {
+      box-shadow: 0 0 8px rgba(88, 186, 255, 0.5);
+    }
+
     .team-country-row.is-eliminated {
       opacity: 0.42;
+    }
+
+    .team-country-row.is-eliminated .team-country-name {
+      text-decoration: line-through;
+      text-decoration-color: rgba(157, 185, 214, 0.4);
+    }
+
+    @keyframes row-rise {
+      from { opacity: 0; transform: translateY(7px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .team-country-row,
+      .team-country-row td,
+      .team-country-name::before,
+      .team-status {
+        animation: none !important;
+        transition: none !important;
+      }
     }
 
     .team-country-name {
@@ -401,24 +538,70 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 82px;
-      padding: 5px 9px;
+      gap: 7px;
+      min-width: 88px;
+      padding: 5px 11px;
       border-radius: 999px;
       border: 1px solid rgba(157, 185, 214, 0.16);
       background: rgba(255, 255, 255, 0.04);
       color: var(--muted);
       font-size: 0.74rem;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
+      transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease;
+    }
+
+    .team-status::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--neutral);
+      flex: none;
+    }
+
+    .team-country-row.is-pending .team-status::before {
+      background: var(--neutral);
     }
 
     .team-country-row.is-alive .team-status {
       color: var(--blue);
-      border-color: rgba(88, 186, 255, 0.22);
+      border-color: rgba(88, 186, 255, 0.28);
+      background: rgba(88, 186, 255, 0.07);
+    }
+
+    .team-country-row.is-alive .team-status::before {
+      background: var(--blue);
+      box-shadow: 0 0 0 0 rgba(88, 186, 255, 0.55);
+      animation: status-pulse 1.9s ease-out infinite;
+    }
+
+    .team-country-row.is-eliminated .team-status::before {
+      background: var(--muted);
     }
 
     .team-country-row.is-champion .team-status {
-      color: var(--gold);
-      border-color: rgba(240, 181, 88, 0.28);
+      color: #2a1d05;
+      font-weight: 600;
+      border-color: rgba(240, 181, 88, 0.6);
+      background: linear-gradient(180deg, #ffe0a3, var(--gold));
+      box-shadow: 0 0 16px rgba(240, 181, 88, 0.45);
+    }
+
+    .team-country-row.is-champion .team-status::before {
+      content: "★";
+      width: auto;
+      height: auto;
+      background: none;
+      color: #7a5512;
+      font-size: 0.72rem;
+      line-height: 1;
+    }
+
+    @keyframes status-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(88, 186, 255, 0.5); }
+      70% { box-shadow: 0 0 0 7px rgba(88, 186, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(88, 186, 255, 0); }
     }
 
     .warnings {
@@ -754,7 +937,7 @@
 
       :root {
         --bracket-gap: 14px;
-        --bracket-row-size: 36px;
+        --bracket-row-size: 52px;
         --bracket-connector-size: 14px;
       }
     }
@@ -784,6 +967,10 @@
         font-size: clamp(2.2rem, 11vw, 3.6rem);
       }
 
+      .hero-logo {
+        height: clamp(40px, 12vw, 64px);
+      }
+
       th,
       td {
         padding: 13px 14px;
@@ -801,9 +988,15 @@
       <div class="hero-main">
         <div class="hero-topline">
           <span class="eyebrow">World Cup dashboard</span>
-          <div class="status-inline" id="status-inline"></div>
+          <div class="status-stack">
+            <span class="refresh-countdown" id="refresh-countdown"></span>
+            <div class="status-inline" id="status-inline"></div>
+          </div>
         </div>
-        <h1>DYRNT World Cup 2026</h1>
+        <div class="hero-title">
+          <img class="hero-logo" src="logo.png" alt="DYRNT World Cup logo" width="256" height="256">
+          <h1>DYRNT World Cup 2026</h1>
+        </div>
         <div class="hero-metrics" id="hero-metrics"></div>
       </div>
     </section>
@@ -854,6 +1047,8 @@
         <p class="footer-note" id="bracket-note"></p>
       </section>
 
+      <!-- Draft Checks: hidden now that the draft is complete. Uncomment this
+           section AND the renderWarnings(configWarnings) call in init() to restore.
       <section class="panel">
         <div class="panel-title">
           <h2>Draft Checks</h2>
@@ -861,6 +1056,7 @@
         </div>
         <div class="warnings" id="config-warnings"></div>
       </section>
+      -->
     </section>
   </main>
 
@@ -868,7 +1064,7 @@
     const DRAFT_CONFIG = {
       apiBase: "https://worldcup-proxy.todrv.com/v4",
       competitionCode: "WC",
-      refreshMs: 60000,
+      refreshMs: 600000,
       teams: {
         red: {
           name: "Red Team",
@@ -969,6 +1165,7 @@
     const ui = {
       heroMetrics: document.getElementById("hero-metrics"),
       statusInline: document.getElementById("status-inline"),
+      refreshCountdown: document.getElementById("refresh-countdown"),
       teamPanels: document.getElementById("team-panels"),
       configWarnings: document.getElementById("config-warnings"),
       scoreboardBody: document.getElementById("scoreboard-body"),
@@ -984,7 +1181,7 @@
     async function init() {
       renderHeroMetrics(0);
       renderTeamSummary(buildTeamCountrySummary([]));
-      renderWarnings(configWarnings);
+      // renderWarnings(configWarnings); // Draft Checks section hidden (draft complete)
       renderScoreboard(calculateScores([]));
       renderBracket(buildEmptyBracket());
       renderStatus({
@@ -1005,7 +1202,12 @@
       renderScoreboard(scores);
       renderBracket(bracketRounds);
       renderStatus(liveData.status);
-      scheduleRefresh();
+
+      // Only begin the auto-refresh cycle if this first fetch actually succeeded.
+      // If it failed, we stop here and let the user refresh manually.
+      if (liveData.status.mode === "live") {
+        startRefreshCycle();
+      }
     }
 
     function renderHeroMetrics(matchCount) {
@@ -1090,9 +1292,9 @@
                 </tr>
               </thead>
               <tbody>
-                ${summary.countries.map((country) => {
+                ${summary.countries.map((country, index) => {
                   return `
-                    <tr class="team-country-row ${escapeHtml(country.stateClass)}">
+                    <tr class="team-country-row ${escapeHtml(country.stateClass)}" style="--i:${escapeHtml(String(index))}">
                       <td><span class="team-country-name">${escapeHtml(country.name)}</span></td>
                       <td class="team-record-cell">${escapeHtml(country.recordLabel)}</td>
                       <td><span class="team-status">${escapeHtml(country.statusLabel)}</span></td>
@@ -1279,20 +1481,66 @@
       }
     }
 
-    function scheduleRefresh() {
+    let refreshTimeoutId = null;
+    let countdownIntervalId = null;
+    let nextRefreshAt = null;
+
+    // Schedule the next refresh DRAFT_CONFIG.refreshMs out, and tick a visible countdown to it.
+    function startRefreshCycle() {
       const now = new Date();
       if (!DRAFT_CONFIG.apiBase || now < TOURNAMENT_START || now > TOURNAMENT_END) {
+        renderCountdown(null);
         return;
       }
 
-      window.setInterval(async () => {
-        const liveData = await loadLiveMatches();
-        renderHeroMetrics(liveData.matches.length);
-        renderTeamSummary(buildTeamCountrySummary(liveData.matches));
-        renderScoreboard(calculateScores(liveData.matches));
-        renderBracket(buildBracket(liveData.matches));
-        renderStatus(liveData.status);
-      }, DRAFT_CONFIG.refreshMs);
+      stopRefreshCycle();
+      nextRefreshAt = Date.now() + DRAFT_CONFIG.refreshMs;
+      renderCountdown(DRAFT_CONFIG.refreshMs);
+      countdownIntervalId = window.setInterval(() => {
+        renderCountdown(nextRefreshAt - Date.now());
+      }, 1000);
+      refreshTimeoutId = window.setTimeout(runRefresh, DRAFT_CONFIG.refreshMs);
+    }
+
+    function stopRefreshCycle() {
+      if (refreshTimeoutId) window.clearTimeout(refreshTimeoutId);
+      if (countdownIntervalId) window.clearInterval(countdownIntervalId);
+      refreshTimeoutId = null;
+      countdownIntervalId = null;
+      nextRefreshAt = null;
+    }
+
+    async function runRefresh() {
+      const liveData = await loadLiveMatches();
+      renderHeroMetrics(liveData.matches.length);
+      renderTeamSummary(buildTeamCountrySummary(liveData.matches));
+      renderScoreboard(calculateScores(liveData.matches));
+      renderBracket(buildBracket(liveData.matches));
+      renderStatus(liveData.status);
+
+      // Matches run ~90 minutes, so there is no value in hammering the API.
+      // Keep cycling every 10 minutes while the feed is healthy; if a fetch
+      // fails, stop retrying and let the user refresh the page to recover.
+      if (liveData.status.mode === "live") {
+        startRefreshCycle();
+      } else {
+        stopRefreshCycle();
+        renderCountdown(null);
+      }
+    }
+
+    function renderCountdown(remainingMs) {
+      if (!ui.refreshCountdown) {
+        return;
+      }
+      if (remainingMs == null || remainingMs < 0) {
+        ui.refreshCountdown.textContent = "";
+        return;
+      }
+      const totalSeconds = Math.round(remainingMs / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = String(totalSeconds % 60).padStart(2, "0");
+      ui.refreshCountdown.textContent = `Next refresh in ${minutes}:${seconds}`;
     }
 
     function buildBracket(matches) {
