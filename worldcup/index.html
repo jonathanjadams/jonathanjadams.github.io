@@ -26,6 +26,7 @@
       --neutral: #708295;
       --neutral-soft: rgba(112, 130, 149, 0.18);
       --gold: #f0b558;
+      --silver: #c7d1df;
       --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
       --radius-lg: 28px;
       --radius-md: 18px;
@@ -276,10 +277,14 @@
     .grid {
       display: grid;
       gap: 18px;
+      min-width: 0;
     }
 
     .panel {
       padding: 22px;
+      /* Let the bracket's min-width live inside its own scroller instead of
+         forcing every panel (and the page) wider than the viewport. */
+      min-width: 0;
     }
 
     .panel-title {
@@ -478,12 +483,14 @@
     }
 
     .team-country-row.is-eliminated {
-      opacity: 0.42;
+      opacity: 0.8;
     }
 
-    .team-country-row.is-eliminated .team-country-name {
+    .team-country-row.is-eliminated .tc-label {
       text-decoration: line-through;
-      text-decoration-color: rgba(157, 185, 214, 0.4);
+      text-decoration-color: var(--silver);
+      text-decoration-thickness: 2px;
+      color: var(--silver);
     }
 
     @keyframes row-rise {
@@ -697,8 +704,20 @@
     }
 
     .score-player-picks {
-      color: var(--muted);
+      color: #dbe5f2;
       font-size: 0.9rem;
+    }
+
+    .score-player-picks .pick-sep {
+      color: var(--muted);
+    }
+
+    .score-player-picks .pick.is-eliminated {
+      text-decoration: line-through;
+      text-decoration-color: var(--silver);
+      text-decoration-thickness: 2px;
+      color: var(--silver);
+      opacity: 0.75;
     }
 
     .score-subtotal {
@@ -834,6 +853,8 @@
       font-size: 0.68rem;
       text-transform: uppercase;
       background: var(--neutral);
+      border: 1px solid transparent;
+      box-sizing: border-box;
     }
 
     .ownership-chip.red {
@@ -846,6 +867,29 @@
 
     .ownership-chip.contested {
       background: var(--gold);
+    }
+
+    /* An individual pick belongs to one person, not the whole team, so it drops the
+       solid team fill for an outlined chip — team-colored dashed ring + text, stamped
+       with the player's initial instead of the team letter. */
+    .ownership-chip.individual {
+      background: transparent;
+      border-style: dashed;
+      color: var(--neutral);
+      border-color: var(--neutral);
+      font-weight: 700;
+    }
+
+    .ownership-chip.individual.red {
+      background: transparent;
+      color: var(--red);
+      border-color: var(--red);
+    }
+
+    .ownership-chip.individual.blue {
+      background: transparent;
+      color: var(--blue);
+      border-color: var(--blue);
     }
 
     .country-name {
@@ -881,6 +925,67 @@
       color: var(--blue);
     }
 
+    /* Knockout loser: eliminated, so it recedes — grayed out and struck through, clearly
+       less prominent than the team that advanced. */
+    .country-row.is-loser {
+      opacity: 0.5;
+    }
+
+    .country-row.is-loser .country-name {
+      color: var(--silver);
+      font-weight: 500;
+      text-decoration: line-through;
+      text-decoration-color: var(--silver);
+      text-decoration-thickness: 2px;
+    }
+
+    /* Live match: pulse the card and flag it so an in-progress game is obvious. */
+    .match.is-live {
+      border-color: rgba(255, 107, 95, 0.6);
+      animation: match-live-pulse 1.7s ease-in-out infinite;
+    }
+
+    .match.is-live .winner-mark {
+      background: rgba(255, 107, 95, 0.14);
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    @keyframes match-live-pulse {
+      0%, 100% { box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18), 0 0 0 0 rgba(255, 107, 95, 0); }
+      50% { box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18), 0 0 0 4px rgba(255, 107, 95, 0.22); }
+    }
+
+    .live-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--red);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .live-tag::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      animation: live-dot 1.2s ease-in-out infinite;
+    }
+
+    @keyframes live-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 107, 95, 0.55); }
+      50% { opacity: 0.45; box-shadow: 0 0 0 5px rgba(255, 107, 95, 0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .match.is-live,
+      .live-tag::before {
+        animation: none !important;
+      }
+    }
+
     .legend {
       display: flex;
       gap: 10px;
@@ -909,6 +1014,11 @@
 
     .legend-dot.blue {
       background: var(--blue);
+    }
+
+    .legend-dot.individual {
+      background: transparent;
+      border: 1px dashed var(--muted);
     }
 
     .footer-note {
@@ -979,6 +1089,91 @@
       .score-player-line {
         gap: 6px;
       }
+
+      .panel-title {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Phones: turn the scoreboard from a horizontally-scrolling table into a
+       stack of readable cards (one per player). */
+    @media (max-width: 640px) {
+      .scoreboard-wrap {
+        overflow: visible;
+        border: none;
+        background: none;
+        box-shadow: none;
+      }
+
+      .scoreboard-wrap table {
+        min-width: 0;
+      }
+
+      .scoreboard-wrap thead {
+        display: none;
+      }
+
+      .scoreboard-wrap tbody tr {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 2px 12px;
+        align-items: center;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .scoreboard-wrap tbody tr:hover {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .scoreboard-wrap td {
+        border: none;
+        padding: 0;
+      }
+
+      .score-rank {
+        grid-row: 1;
+        grid-column: 1;
+        width: auto;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--ink);
+      }
+
+      .score-rank::before {
+        content: "#";
+        color: var(--muted);
+        margin-right: 1px;
+      }
+
+      .score-player-cell {
+        grid-row: 1;
+        grid-column: 2;
+      }
+
+      .score-subtotal,
+      .score-total {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-top: 6px;
+        padding-top: 6px;
+        border-top: 1px solid rgba(157, 185, 214, 0.08);
+      }
+
+      .score-subtotal::before,
+      .score-total::before {
+        content: attr(data-label);
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
     }
   </style>
 </head>
@@ -1042,6 +1237,7 @@
         <div class="legend">
           <span class="legend-item"><span class="legend-dot red"></span>Red team claim</span>
           <span class="legend-item"><span class="legend-dot blue"></span>Blue team claim</span>
+          <span class="legend-item"><span class="legend-dot individual"></span>Individual pick (player initial)</span>
           <span class="legend-item"><span class="legend-dot"></span>Unaffiliated</span>
         </div>
         <p class="footer-note" id="bracket-note"></p>
@@ -1295,7 +1491,7 @@
                 ${summary.countries.map((country, index) => {
                   return `
                     <tr class="team-country-row ${escapeHtml(country.stateClass)}" style="--i:${escapeHtml(String(index))}">
-                      <td><span class="team-country-name">${escapeHtml(country.name)}</span></td>
+                      <td><span class="team-country-name"><span class="tc-label">${escapeHtml(country.name)}</span></span></td>
                       <td class="team-record-cell">${escapeHtml(country.recordLabel)}</td>
                       <td><span class="team-status">${escapeHtml(country.statusLabel)}</span></td>
                     </tr>
@@ -1312,11 +1508,11 @@
       ui.scoreboardBody.innerHTML = rows.map((row, index) => {
         return `
           <tr>
-            <td class="score-rank">${escapeHtml(String(index + 1))}</td>
-            <td><div class="score-player-line"><span class="score-player ${escapeHtml(row.team)}">${escapeHtml(row.name)}</span><span class="score-player-picks">${escapeHtml(row.individualCodes.map((code) => formatCountryName(code)).join(", "))}</span></div></td>
-            <td class="score-subtotal">${escapeHtml(String(row.teamCountryPts))}</td>
-            <td class="score-subtotal">${escapeHtml(String(row.individualPts))}</td>
-            <td class="score-total">${escapeHtml(String(row.total))}</td>
+            <td class="score-rank" data-label="Rank">${escapeHtml(String(index + 1))}</td>
+            <td class="score-player-cell"><div class="score-player-line"><span class="score-player ${escapeHtml(row.team)}">${escapeHtml(row.name)}</span><span class="score-player-picks">${row.individualPicks.map((pick) => `<span class="pick is-${escapeHtml(pick.state)}">${escapeHtml(pick.name)}</span>`).join('<span class="pick-sep">, </span>')}</span></div></td>
+            <td class="score-subtotal" data-label="Team pts">${escapeHtml(String(row.teamCountryPts))}</td>
+            <td class="score-subtotal" data-label="Indiv pts">${escapeHtml(String(row.individualPts))}</td>
+            <td class="score-total" data-label="Total">${escapeHtml(String(row.total))}</td>
           </tr>
         `;
       }).join("");
@@ -1345,18 +1541,30 @@
       const rowStart = getBracketRowStart(roundKey, index);
       const homeWinner = match.winnerCode && match.winnerCode === match.home.code;
       const awayWinner = match.winnerCode && match.winnerCode === match.away.code;
-      const metaText = formatBracketMeta(match.utcDate);
+      // Once a match is decided, the non-winner is eliminated (grayed + struck through).
+      const homeLoser = Boolean(match.winnerCode && match.home.code && !homeWinner);
+      const awayLoser = Boolean(match.winnerCode && match.away.code && !awayWinner);
+      const isLive = isLiveMatch(match.status);
+      const score = match.score || { home: null, away: null };
+      const metaRight = isLive
+        ? `<span class="live-tag">Live</span>`
+        : escapeHtml(formatBracketMeta(match.utcDate));
 
       return `
-        <article class="match" style="grid-row: ${escapeHtml(String(rowStart))} / span 2">
+        <article class="match ${isLive ? "is-live" : ""}" style="grid-row: ${escapeHtml(String(rowStart))} / span 2">
           <div class="match-meta">
             <span>M${escapeHtml(String(index + 1))}</span>
-            <span>${escapeHtml(metaText)}</span>
+            <span>${metaRight}</span>
           </div>
-          ${renderCountryRow(match.home, homeWinner)}
-          ${renderCountryRow(match.away, awayWinner)}
+          ${renderCountryRow(match.home, homeWinner, score.home, homeLoser)}
+          ${renderCountryRow(match.away, awayWinner, score.away, awayLoser)}
         </article>
       `;
+    }
+
+    // A match is "live" while it is being played (football-data: IN_PLAY or PAUSED at half).
+    function isLiveMatch(status) {
+      return status === "IN_PLAY" || status === "PAUSED";
     }
 
     function renderRoundConnectors(roundKey, matchCount) {
@@ -1392,18 +1600,22 @@
       }).format(date);
     }
 
-    function renderCountryRow(country, isWinner) {
+    function renderCountryRow(country, isWinner, goals, isLoser) {
       const ownership = getCountryOwnership(country.code);
+      // Show this team's goals where the W/- used to sit; "-" until the match has a score.
+      const mark = typeof goals === "number" ? String(goals) : "-";
+      const stateClass = isWinner ? "is-winner" : (isLoser ? "is-loser" : "");
+      const chipClass = [ownership.kind, ownership.team].filter(Boolean).join(" ");
 
       return `
-        <div class="country-row ${isWinner ? "is-winner" : ""}">
+        <div class="country-row ${stateClass}">
           <div class="country-main">
-            <span class="ownership-chip ${escapeHtml(ownership)}">${escapeHtml(ownershipLabel(ownership))}</span>
+            <span class="ownership-chip ${escapeHtml(chipClass)}"${ownership.title ? ` title="${escapeHtml(ownership.title)}"` : ""}>${escapeHtml(ownership.label)}</span>
             <span class="country-name">${escapeHtml(country.name || "TBD")}</span>
           </div>
           <div class="country-main">
             <span class="country-code">${escapeHtml(country.code || "TBD")}</span>
-            <span class="winner-mark">${isWinner ? "W" : "-"}</span>
+            <span class="winner-mark">${escapeHtml(mark)}</span>
           </div>
         </div>
       `;
@@ -1559,11 +1771,47 @@
       ROUND_ORDER.forEach((roundKey) => {
         rounds[roundKey] = rounds[roundKey]
           .slice(0, ROUND_SIZES[roundKey])
-          .sort(sortMatches)
           .concat(createPlaceholders(roundKey, Math.max(ROUND_SIZES[roundKey] - rounds[roundKey].length, 0)));
       });
 
+      // Advance winners client-side: the API lags filling later rounds, so fill any empty slot
+      // from its two feeder matches (slot j <- winners of previous-round matches 2j and 2j+1). The
+      // API's own assignments are kept; only TBD slots are computed, so this self-corrects as games
+      // finish. Bracket order (not kickoff time) is preserved above so the pairing is correct.
+      for (let roundIndex = 1; roundIndex < ROUND_ORDER.length; roundIndex += 1) {
+        const previousRound = rounds[ROUND_ORDER[roundIndex - 1]];
+        const currentRound = rounds[ROUND_ORDER[roundIndex]];
+        currentRound.forEach((match, slotIndex) => {
+          if (!match.home.code) {
+            const winner = winnerTeamOf(previousRound[slotIndex * 2]);
+            if (winner) {
+              match.home = winner;
+            }
+          }
+          if (!match.away.code) {
+            const winner = winnerTeamOf(previousRound[(slotIndex * 2) + 1]);
+            if (winner) {
+              match.away = winner;
+            }
+          }
+        });
+      }
+
       return rounds;
+    }
+
+    // The winning team ({ code, name }) of a completed match, or null if it has no decided winner.
+    function winnerTeamOf(match) {
+      if (!match || !match.winnerCode) {
+        return null;
+      }
+      if (match.winnerCode === match.home.code) {
+        return { code: match.home.code, name: match.home.name };
+      }
+      if (match.winnerCode === match.away.code) {
+        return { code: match.away.code, name: match.away.name };
+      }
+      return null;
     }
 
     function buildEmptyBracket() {
@@ -1581,6 +1829,7 @@
           status: roundKey === "R32" ? "Awaiting qualifiers" : "Awaiting winner",
           utcDate: null,
           winnerCode: null,
+          score: { home: null, away: null },
           home: { name: "TBD", code: null },
           away: { name: "TBD", code: null }
         };
@@ -1599,6 +1848,10 @@
           status: match.status || "SCHEDULED",
           utcDate: match.utcDate || null,
           winnerCode: resolveWinnerCode(match, homeCode, awayCode),
+          score: {
+            home: match.score && match.score.fullTime ? match.score.fullTime.home : null,
+            away: match.score && match.score.fullTime ? match.score.fullTime.away : null
+          },
           home: {
             code: homeCode,
             name: getCountryName(match.homeTeam, homeCode)
@@ -1618,7 +1871,10 @@
     }
 
     function calculateScores(matches) {
-      const countryStats = buildCountryStats(normalizeMatches(matches));
+      const knockoutMatches = normalizeMatches(matches);
+      const countryStats = buildCountryStats(knockoutMatches);
+      const knockoutPublished = knockoutMatches.length > 0;
+      const bracketComplete = isKnockoutDrawComplete(knockoutMatches);
 
       return DRAFT_CONFIG.players.map((player) => {
         const teamCountries = DRAFT_CONFIG.teams[player.team]?.sharedCountries || [];
@@ -1633,7 +1889,11 @@
           teamCountryPts,
           individualPts,
           total: teamCountryPts + individualPts,
-          individualCodes: player.individualPicks || []
+          individualPicks: (player.individualPicks || []).map((code) => ({
+            code,
+            name: formatCountryName(code),
+            state: getCountryTournamentState(code, countryStats, knockoutPublished, bracketComplete)
+          }))
         };
       }).sort((left, right) => {
         if (right.total !== left.total) {
@@ -1647,11 +1907,12 @@
       const knockoutMatches = normalizeMatches(matches);
       const countryStats = buildCountryStats(knockoutMatches);
       const knockoutPublished = knockoutMatches.length > 0;
+      const bracketComplete = isKnockoutDrawComplete(knockoutMatches);
 
       return Object.entries(DRAFT_CONFIG.teams).map(([teamKey, team]) => {
         const countries = (team.sharedCountries || []).map((code) => {
           const entry = countryStats.get(code);
-          const state = getCountryTournamentState(code, countryStats, knockoutPublished);
+          const state = getCountryTournamentState(code, countryStats, knockoutPublished, bracketComplete);
           return {
             name: formatCountryName(code),
             recordLabel: formatCountryRecord(entry, knockoutPublished),
@@ -1696,15 +1957,17 @@
           stats.get(match.winnerCode).knockoutWins += 1;
         }
 
-        const loserCode = match.winnerCode === match.home.code
-          ? match.away.code
-          : match.winnerCode === match.away.code
-            ? match.home.code
-            : null;
+        if (match.winnerCode) {
+          const loserCode = match.winnerCode === match.home.code
+            ? match.away.code
+            : match.winnerCode === match.away.code
+              ? match.home.code
+              : null;
 
-        if (loserCode && stats.has(loserCode)) {
-          stats.get(loserCode).eliminated = true;
-          stats.get(loserCode).losses += 1;
+          if (loserCode && stats.has(loserCode)) {
+            stats.get(loserCode).eliminated = true;
+            stats.get(loserCode).losses += 1;
+          }
         }
 
         if (match.roundKey === "FINAL" && match.winnerCode && stats.has(match.winnerCode)) {
@@ -1724,7 +1987,7 @@
       return (entry.qualified ? 1 : 0) + entry.knockoutWins + (entry.champion ? 1 : 0);
     }
 
-    function getCountryTournamentState(code, stats, knockoutPublished) {
+    function getCountryTournamentState(code, stats, knockoutPublished, bracketComplete) {
       const entry = stats.get(code);
 
       if (!knockoutPublished) {
@@ -1732,7 +1995,9 @@
       }
 
       if (!entry) {
-        return "eliminated";
+        // Not placed in the knockout. Only call it "out" once the R32 draw is
+        // fully populated; while slots are still TBD the team is awaiting placement.
+        return bracketComplete ? "eliminated" : "pending";
       }
 
       if (entry.champion) {
@@ -1744,6 +2009,12 @@
       }
 
       return "alive";
+    }
+
+    // The R32 draw is complete once every first-round slot has a named team.
+    function isKnockoutDrawComplete(knockoutMatches) {
+      const firstRound = knockoutMatches.filter((match) => match.roundKey === "R32");
+      return firstRound.length > 0 && firstRound.every((match) => match.home.code && match.away.code);
     }
 
     function formatCountryRecord(entry, knockoutPublished) {
@@ -1771,50 +2042,71 @@
       const index = new Map();
 
       Object.entries(DRAFT_CONFIG.teams).forEach(([teamKey, team]) => {
-        (team.sharedCountries || []).forEach((code) => registerCountryOwner(index, code, teamKey));
+        (team.sharedCountries || []).forEach((code) =>
+          registerCountryOwner(index, code, { team: teamKey, kind: "shared" }));
       });
 
       DRAFT_CONFIG.players.forEach((player) => {
-        (player.individualPicks || []).forEach((code) => registerCountryOwner(index, code, player.team));
+        (player.individualPicks || []).forEach((code) =>
+          registerCountryOwner(index, code, { team: player.team, kind: "individual", player: player.name }));
       });
 
       return index;
     }
 
-    function registerCountryOwner(index, code, teamKey) {
+    function registerCountryOwner(index, code, claim) {
       if (!code) {
         return;
       }
 
-      const owners = index.get(code) || new Set();
-      owners.add(teamKey);
-      index.set(code, owners);
+      const claims = index.get(code) || [];
+      claims.push(claim);
+      index.set(code, claims);
     }
 
+    // Describe how a country's ownership chip should read: a solid team chip for a
+    // team-wide pick, a distinct outlined chip (player's initial) for an individual's
+    // personal pick, gold "!" when two teams both claim it, or neutral when undrafted.
     function getCountryOwnership(code) {
-      if (!code || !ownershipIndex.has(code)) {
-        return "neutral";
+      const claims = code ? ownershipIndex.get(code) : null;
+      if (!claims || claims.length === 0) {
+        return { kind: "neutral", team: null, label: "-", title: "" };
       }
 
-      const owners = Array.from(ownershipIndex.get(code));
-      if (owners.length === 1) {
-        return owners[0];
+      const teams = new Set(claims.map((claim) => claim.team));
+      if (teams.size > 1) {
+        return { kind: "contested", team: null, label: "!", title: "Claimed by both teams" };
       }
 
-      return "contested";
+      const team = claims[0].team;
+      const sharedClaim = claims.find((claim) => claim.kind === "shared");
+      const individualClaim = claims.find((claim) => claim.kind === "individual");
+
+      // A shared team pick keeps the team color; an individual's own pick is marked
+      // separately with that player's initial so it isn't mistaken for a team claim.
+      if (individualClaim && !sharedClaim) {
+        return {
+          kind: "individual",
+          team,
+          label: playerInitial(individualClaim.player),
+          title: `${individualClaim.player}'s individual pick`
+        };
+      }
+
+      return { kind: "team", team, label: teamInitial(team), title: teamLabel(team) };
     }
 
-    function ownershipLabel(ownership) {
-      if (ownership === "red") {
-        return "R";
-      }
-      if (ownership === "blue") {
-        return "B";
-      }
-      if (ownership === "contested") {
-        return "!";
-      }
-      return "-";
+    function teamInitial(team) {
+      return team ? team.charAt(0).toUpperCase() : "-";
+    }
+
+    function teamLabel(team) {
+      const config = DRAFT_CONFIG.teams[team];
+      return config ? config.name : "";
+    }
+
+    function playerInitial(name) {
+      return name ? name.charAt(0).toUpperCase() : "?";
     }
 
     function normalizeRoundKey(stage) {
@@ -1825,6 +2117,11 @@
     }
 
     function resolveWinnerCode(match, homeCode, awayCode) {
+      // A match only counts once it is actually over. PAUSED / IN_PLAY / TIMED games are still
+      // being played, even though the API may already report a provisional score.winner.
+      if (match.status !== "FINISHED" && match.status !== "AWARDED") {
+        return null;
+      }
       if (match.score && match.score.winner === "HOME_TEAM") {
         return homeCode;
       }
