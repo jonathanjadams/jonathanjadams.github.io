@@ -306,6 +306,170 @@
       text-transform: uppercase;
     }
 
+    .today-matches {
+      display: grid;
+      gap: 0;
+    }
+
+    .today-match-row {
+      display: grid;
+      grid-template-columns: minmax(86px, 0.32fr) minmax(0, 1fr) minmax(170px, 0.55fr);
+      gap: 16px;
+      align-items: center;
+      padding: 14px 0;
+      border-top: 1px solid rgba(157, 185, 214, 0.12);
+    }
+
+    .today-match-row:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .today-match-row:last-child {
+      padding-bottom: 0;
+    }
+
+    .today-time {
+      display: grid;
+      gap: 4px;
+    }
+
+    .today-time-main,
+    .today-time-status,
+    .today-vs {
+      font-family: "IBM Plex Mono", monospace;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .today-time-main {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .today-time-status {
+      color: var(--muted);
+      font-size: 0.68rem;
+    }
+
+    .today-match-row.is-live .today-time-status {
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    .today-matchup {
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .today-teams {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+    }
+
+    .today-side {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .today-side.away {
+      justify-items: end;
+      text-align: right;
+    }
+
+    .today-country {
+      min-width: 0;
+      overflow: hidden;
+      color: var(--ink);
+      font-weight: 700;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .today-country-code {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .today-owner {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      max-width: 100%;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(157, 185, 214, 0.18);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 600;
+      line-height: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .today-owner.red {
+      border-color: rgba(255, 107, 95, 0.28);
+      background: rgba(255, 107, 95, 0.1);
+      color: #ffb0a9;
+    }
+
+    .today-owner.blue {
+      border-color: rgba(88, 186, 255, 0.28);
+      background: rgba(88, 186, 255, 0.1);
+      color: #a7dcff;
+    }
+
+    .today-owner.team {
+      color: var(--ink);
+    }
+
+    .today-owner.individual {
+      background: transparent;
+      border-style: dashed;
+    }
+
+    .today-vs {
+      color: var(--muted);
+      font-size: 0.68rem;
+    }
+
+    .today-stakes {
+      display: grid;
+      gap: 5px;
+      justify-items: end;
+      min-width: 0;
+      text-align: right;
+    }
+
+    .today-stake-label {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      color: var(--ink);
+      font-weight: 700;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .today-stake-detail,
+    .today-empty {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .today-empty {
+      padding-top: 2px;
+    }
+
     .teams {
       display: grid;
       gap: 14px;
@@ -1093,6 +1257,17 @@
       .panel-title {
         flex-wrap: wrap;
       }
+
+      .today-match-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .today-time,
+      .today-stakes {
+        justify-items: start;
+        text-align: left;
+      }
     }
 
     /* Phones: turn the scoreboard from a horizontally-scrolling table into a
@@ -1175,6 +1350,21 @@
         letter-spacing: 0.06em;
       }
     }
+
+    @media (max-width: 520px) {
+      .today-teams {
+        grid-template-columns: 1fr;
+      }
+
+      .today-side.away {
+        justify-items: start;
+        text-align: left;
+      }
+
+      .today-vs {
+        justify-self: start;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1197,6 +1387,14 @@
     </section>
 
     <section class="grid">
+      <section class="panel">
+        <div class="panel-title">
+          <h2>Today's Matches</h2>
+          <span class="table-subcopy" id="today-matches-date">Central Time</span>
+        </div>
+        <div class="today-matches" id="today-matches"></div>
+      </section>
+
       <section class="panel">
         <div class="panel-title">
           <h2>Team Countries</h2>
@@ -1337,6 +1535,7 @@
     };
     const SHARED_COUNTRIES_PER_TEAM = 4;
     const PLAYERS_PER_TEAM = 4;
+    const CENTRAL_TIME_ZONE = "America/Chicago";
     const BRACKET_MATCH_ORDER = {
       R32: [74, 77, 73, 75, 83, 84, 81, 82, 76, 78, 79, 80, 86, 88, 85, 87],
       R16: [89, 90, 93, 94, 91, 92, 95, 96],
@@ -1446,6 +1645,8 @@
       heroMetrics: document.getElementById("hero-metrics"),
       statusInline: document.getElementById("status-inline"),
       refreshCountdown: document.getElementById("refresh-countdown"),
+      todayMatches: document.getElementById("today-matches"),
+      todayMatchesDate: document.getElementById("today-matches-date"),
       teamPanels: document.getElementById("team-panels"),
       configWarnings: document.getElementById("config-warnings"),
       scoreboardBody: document.getElementById("scoreboard-body"),
@@ -1460,6 +1661,7 @@
 
     async function init() {
       renderHeroMetrics(0);
+      renderTodayMatches(buildTodayMatches([]));
       renderTeamSummary(buildTeamCountrySummary([]));
       // renderWarnings(configWarnings); // Draft Checks section hidden (draft complete)
       renderScoreboard(calculateScores([]));
@@ -1478,6 +1680,7 @@
       const bracketRounds = buildBracket(liveData.matches);
       const scores = calculateScores(liveData.matches);
       renderHeroMetrics(liveData.matches.length);
+      renderTodayMatches(buildTodayMatches(liveData.matches, bracketRounds));
       renderTeamSummary(buildTeamCountrySummary(liveData.matches));
       renderScoreboard(scores);
       renderBracket(bracketRounds);
@@ -1550,6 +1753,167 @@
       ui.configWarnings.innerHTML = warnings.map((warning) => {
         return `<div class="warning-card">${escapeHtml(warning)}</div>`;
       }).join("");
+    }
+
+    function renderTodayMatches(matches) {
+      ui.todayMatchesDate.textContent = `${formatCentralDate(new Date())} | Central Time`;
+
+      if (!matches.length) {
+        ui.todayMatches.innerHTML = `
+          <p class="today-empty">No matches loaded for today yet.</p>
+        `;
+        return;
+      }
+
+      ui.todayMatches.innerHTML = matches.map(renderTodayMatch).join("");
+    }
+
+    function renderTodayMatch(match) {
+      const homeAssignment = getCountryAssignment(match.home.code);
+      const awayAssignment = getCountryAssignment(match.away.code);
+      const stakeLabel = formatTodayStakeLabel(homeAssignment, awayAssignment);
+      const isLive = isLiveMatch(match.status);
+
+      return `
+        <article class="today-match-row ${isLive ? "is-live" : ""}">
+          <div class="today-time">
+            <span class="today-time-main">${escapeHtml(formatCentralTime(match.utcDate))}</span>
+            <span class="today-time-status">${escapeHtml(formatMatchStatus(match.status))}</span>
+          </div>
+          <div class="today-matchup">
+            <div class="today-teams">
+              ${renderTodaySide(match.home, homeAssignment, "home")}
+              <span class="today-vs">vs</span>
+              ${renderTodaySide(match.away, awayAssignment, "away")}
+            </div>
+          </div>
+          <div class="today-stakes">
+            <span class="today-stake-label">${escapeHtml(stakeLabel)}</span>
+            <span class="today-stake-detail">${escapeHtml(formatMatchStage(match))}</span>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderTodaySide(country, assignment, side) {
+      const ownerClass = [assignment.kind, assignment.team].filter(Boolean).join(" ");
+      const ownerTitle = assignment.title ? ` title="${escapeHtml(assignment.title)}"` : "";
+      const countryCode = country.code
+        ? ` <span class="today-country-code">${escapeHtml(country.code)}</span>`
+        : "";
+
+      return `
+        <div class="today-side ${escapeHtml(side)}">
+          <span class="today-country">${escapeHtml(country.name || "TBD")}${countryCode}</span>
+          <span class="today-owner ${escapeHtml(ownerClass)}"${ownerTitle}>${escapeHtml(assignment.label)}</span>
+        </div>
+      `;
+    }
+
+    function buildTodayMatches(matches, bracketRounds = null) {
+      const centralDateKey = getCentralDateKey(new Date());
+      const bracketMatchLookup = buildBracketMatchLookup(bracketRounds || buildBracket(matches));
+
+      return matches
+        .map((match, index) => normalizeScheduleMatch(match, index, bracketMatchLookup))
+        .filter((match) => match.utcDate && getCentralDateKey(match.utcDate) === centralDateKey)
+        .sort(sortMatches);
+    }
+
+    function normalizeScheduleMatch(match, index, bracketMatchLookup) {
+      const roundKey = normalizeRoundKey(match.stage);
+      const matchNumber = resolveMatchNumber(match, roundKey);
+      const bracketMatch = matchNumber ? bracketMatchLookup.get(matchNumber) : null;
+      const homeCode = getCountryCode(match.homeTeam);
+      const awayCode = getCountryCode(match.awayTeam);
+
+      return {
+        id: match.id || `${match.stage || "match"}-${index}`,
+        matchNumber,
+        roundKey,
+        stage: match.stage || null,
+        group: match.group || null,
+        status: match.status || "SCHEDULED",
+        utcDate: match.utcDate || null,
+        score: bracketMatch
+          ? bracketMatch.score
+          : {
+            home: match.score && match.score.fullTime ? match.score.fullTime.home : null,
+            away: match.score && match.score.fullTime ? match.score.fullTime.away : null
+          },
+        home: bracketMatch ? bracketMatch.home : {
+          code: homeCode,
+          name: getCountryName(match.homeTeam, homeCode)
+        },
+        away: bracketMatch ? bracketMatch.away : {
+          code: awayCode,
+          name: getCountryName(match.awayTeam, awayCode)
+        }
+      };
+    }
+
+    function buildBracketMatchLookup(rounds) {
+      const lookup = new Map();
+
+      Object.values(rounds).flat().forEach((match) => {
+        if (match.matchNumber) {
+          lookup.set(match.matchNumber, match);
+        }
+      });
+
+      return lookup;
+    }
+
+    function formatTodayStakeLabel(homeAssignment, awayAssignment) {
+      const homeLabel = homeAssignment.shortLabel;
+      const awayLabel = awayAssignment.shortLabel;
+
+      if (homeAssignment.kind === "neutral" && awayAssignment.kind === "neutral") {
+        if (homeLabel === "TBD" || awayLabel === "TBD") {
+          return "TBD vs TBD";
+        }
+        return "No drafted stake";
+      }
+
+      return `${homeLabel} vs ${awayLabel}`;
+    }
+
+    function getCountryAssignment(code) {
+      if (!code) {
+        return { kind: "neutral", team: null, label: "TBD", shortLabel: "TBD", title: "" };
+      }
+
+      const claims = ownershipIndex.get(code);
+      if (!claims || claims.length === 0) {
+        return { kind: "neutral", team: null, label: "Undrafted", shortLabel: "Undrafted", title: "" };
+      }
+
+      const teams = new Set(claims.map((claim) => claim.team));
+      if (teams.size > 1) {
+        return { kind: "contested", team: null, label: "Both teams", shortLabel: "Both teams", title: "Claimed by both teams" };
+      }
+
+      const team = claims[0].team;
+      const sharedClaim = claims.find((claim) => claim.kind === "shared");
+      const individualClaim = claims.find((claim) => claim.kind === "individual");
+
+      if (individualClaim && !sharedClaim) {
+        return {
+          kind: "individual",
+          team,
+          label: individualClaim.player,
+          shortLabel: individualClaim.player,
+          title: `${individualClaim.player}'s individual pick (${teamLabel(team)})`
+        };
+      }
+
+      return {
+        kind: "team",
+        team,
+        label: teamLabel(team),
+        shortLabel: teamLabel(team),
+        title: `${teamLabel(team)} shared country`
+      };
     }
 
     function renderTeamSummary(teamSummaries) {
@@ -1809,10 +2173,12 @@
 
     async function runRefresh() {
       const liveData = await loadLiveMatches();
+      const bracketRounds = buildBracket(liveData.matches);
       renderHeroMetrics(liveData.matches.length);
+      renderTodayMatches(buildTodayMatches(liveData.matches, bracketRounds));
       renderTeamSummary(buildTeamCountrySummary(liveData.matches));
       renderScoreboard(calculateScores(liveData.matches));
-      renderBracket(buildBracket(liveData.matches));
+      renderBracket(bracketRounds);
       renderStatus(liveData.status);
 
       // Matches run ~90 minutes, so there is no value in hammering the API.
@@ -2341,6 +2707,89 @@
         hour: "numeric",
         minute: "2-digit"
       }).format(date);
+    }
+
+    function formatCentralDate(value) {
+      const date = value instanceof Date ? value : new Date(value);
+      if (Number.isNaN(date.getTime())) {
+        return "Today";
+      }
+
+      return new Intl.DateTimeFormat(undefined, {
+        timeZone: CENTRAL_TIME_ZONE,
+        weekday: "short",
+        month: "short",
+        day: "numeric"
+      }).format(date);
+    }
+
+    function formatCentralTime(value) {
+      const date = value instanceof Date ? value : new Date(value);
+      if (Number.isNaN(date.getTime())) {
+        return "TBD";
+      }
+
+      return `${new Intl.DateTimeFormat(undefined, {
+        timeZone: CENTRAL_TIME_ZONE,
+        hour: "numeric",
+        minute: "2-digit"
+      }).format(date)} CT`;
+    }
+
+    function getCentralDateKey(value) {
+      const date = value instanceof Date ? value : new Date(value);
+      if (Number.isNaN(date.getTime())) {
+        return null;
+      }
+
+      const parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: CENTRAL_TIME_ZONE,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }).formatToParts(date).reduce((accumulator, part) => {
+        accumulator[part.type] = part.value;
+        return accumulator;
+      }, {});
+
+      return `${parts.year}-${parts.month}-${parts.day}`;
+    }
+
+    function formatMatchStatus(status) {
+      if (status === "IN_PLAY") {
+        return "Live";
+      }
+      if (status === "PAUSED") {
+        return "Half";
+      }
+      if (status === "FINISHED") {
+        return "Final";
+      }
+      if (status === "AWARDED") {
+        return "Awarded";
+      }
+      return "Scheduled";
+    }
+
+    function formatMatchStage(match) {
+      if (match.roundKey && ROUND_TITLES[match.roundKey]) {
+        return match.matchNumber
+          ? `${ROUND_TITLES[match.roundKey]} | M${match.matchNumber}`
+          : ROUND_TITLES[match.roundKey];
+      }
+      if (match.stage === "GROUP_STAGE" && match.group) {
+        return formatGroupLabel(match.group);
+      }
+      if (match.stage === "THIRD_PLACE") {
+        return match.matchNumber ? `Third place | M${match.matchNumber}` : "Third place";
+      }
+      return "World Cup";
+    }
+
+    function formatGroupLabel(group) {
+      return String(group)
+        .replace(/^GROUP_/, "Group ")
+        .replaceAll("_", " ");
     }
 
     function findConfigWarnings() {
