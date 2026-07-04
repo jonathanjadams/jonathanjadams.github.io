@@ -1337,6 +1337,90 @@
     };
     const SHARED_COUNTRIES_PER_TEAM = 4;
     const PLAYERS_PER_TEAM = 4;
+    const BRACKET_MATCH_ORDER = {
+      R32: [74, 77, 73, 75, 83, 84, 81, 82, 76, 78, 79, 80, 86, 88, 85, 87],
+      R16: [89, 90, 93, 94, 91, 92, 95, 96],
+      QF: [97, 98, 99, 100],
+      SF: [101, 102],
+      FINAL: [104]
+    };
+    const CHRONOLOGICAL_MATCH_NUMBERS = {
+      R32: [73, 76, 74, 75, 78, 77, 79, 80, 82, 81, 84, 83, 85, 88, 86, 87],
+      R16: [90, 89, 91, 92, 93, 94, 95, 96],
+      QF: [97, 98, 99, 100],
+      SF: [101, 102],
+      FINAL: [104]
+    };
+    // football-data.org does not expose FIFA match numbers for WC knockouts,
+    // so map its stable fixture IDs and the published kickoff schedule.
+    const FOOTBALL_DATA_MATCH_NUMBERS = {
+      537415: 74,
+      537416: 77,
+      537417: 73,
+      537418: 75,
+      537419: 83,
+      537420: 84,
+      537421: 81,
+      537422: 82,
+      537423: 76,
+      537424: 78,
+      537425: 79,
+      537426: 80,
+      537427: 86,
+      537428: 88,
+      537429: 85,
+      537430: 87,
+      537375: 89,
+      537376: 90,
+      537377: 91,
+      537378: 92,
+      537379: 93,
+      537380: 94,
+      537381: 95,
+      537382: 96,
+      537383: 97,
+      537384: 98,
+      537385: 99,
+      537386: 100,
+      537387: 101,
+      537388: 102,
+      537389: 103,
+      537390: 104
+    };
+    const KNOCKOUT_MATCH_NUMBERS_BY_START = {
+      "2026-06-28T19:00": 73,
+      "2026-06-29T17:00": 76,
+      "2026-06-29T20:30": 74,
+      "2026-06-30T01:00": 75,
+      "2026-06-30T17:00": 78,
+      "2026-06-30T21:00": 77,
+      "2026-07-01T01:00": 79,
+      "2026-07-01T16:00": 80,
+      "2026-07-01T20:00": 82,
+      "2026-07-02T00:00": 81,
+      "2026-07-02T19:00": 84,
+      "2026-07-02T23:00": 83,
+      "2026-07-03T03:00": 85,
+      "2026-07-03T18:00": 88,
+      "2026-07-03T22:00": 86,
+      "2026-07-04T01:30": 87,
+      "2026-07-04T17:00": 90,
+      "2026-07-04T21:00": 89,
+      "2026-07-05T20:00": 91,
+      "2026-07-06T00:00": 92,
+      "2026-07-06T19:00": 93,
+      "2026-07-07T00:00": 94,
+      "2026-07-07T16:00": 95,
+      "2026-07-07T20:00": 96,
+      "2026-07-09T20:00": 97,
+      "2026-07-10T19:00": 98,
+      "2026-07-11T21:00": 99,
+      "2026-07-12T01:00": 100,
+      "2026-07-14T19:00": 101,
+      "2026-07-15T19:00": 102,
+      "2026-07-18T21:00": 103,
+      "2026-07-19T19:00": 104
+    };
     const BRACKET_ROW_LAYOUT = {
       R32: { start: 1, step: 2 },
       R16: { start: 2, step: 4 },
@@ -1539,6 +1623,7 @@
 
     function renderMatch(match, roundKey, index) {
       const rowStart = getBracketRowStart(roundKey, index);
+      const matchLabel = match.matchNumber ? `M${match.matchNumber}` : `M${index + 1}`;
       const homeWinner = match.winnerCode && match.winnerCode === match.home.code;
       const awayWinner = match.winnerCode && match.winnerCode === match.away.code;
       // Once a match is decided, the non-winner is eliminated (grayed + struck through).
@@ -1553,7 +1638,7 @@
       return `
         <article class="match ${isLive ? "is-live" : ""}" style="grid-row: ${escapeHtml(String(rowStart))} / span 2">
           <div class="match-meta">
-            <span>M${escapeHtml(String(index + 1))}</span>
+            <span>${escapeHtml(matchLabel)}</span>
             <span>${metaRight}</span>
           </div>
           ${renderCountryRow(match.home, homeWinner, score.home, homeLoser)}
@@ -1761,17 +1846,18 @@
         return accumulator;
       }, {});
 
-      normalizeMatches(matches).forEach((match) => {
+      assignFallbackMatchNumbers(normalizeMatches(matches)).forEach((match) => {
         if (!match.roundKey || !rounds[match.roundKey]) {
           return;
         }
-        rounds[match.roundKey].push(match);
+        assignMatchToBracketSlot(rounds, match);
       });
 
       ROUND_ORDER.forEach((roundKey) => {
-        rounds[roundKey] = rounds[roundKey]
-          .slice(0, ROUND_SIZES[roundKey])
-          .concat(createPlaceholders(roundKey, Math.max(ROUND_SIZES[roundKey] - rounds[roundKey].length, 0)));
+        const matchNumbers = BRACKET_MATCH_ORDER[roundKey] || [];
+        rounds[roundKey] = matchNumbers.map((matchNumber, index) => {
+          return rounds[roundKey][index] || createPlaceholder(roundKey, index, matchNumber);
+        });
       });
 
       // Advance winners client-side: the API lags filling later rounds, so fill any empty slot
@@ -1822,18 +1908,23 @@
     }
 
     function createPlaceholders(roundKey, count) {
-      return Array.from({ length: count }, (_, index) => {
-        return {
-          id: `${roundKey}-${index + 1}`,
-          roundKey,
-          status: roundKey === "R32" ? "Awaiting qualifiers" : "Awaiting winner",
-          utcDate: null,
-          winnerCode: null,
-          score: { home: null, away: null },
-          home: { name: "TBD", code: null },
-          away: { name: "TBD", code: null }
-        };
-      });
+      const matchNumbers = BRACKET_MATCH_ORDER[roundKey] || [];
+      return Array.from({ length: count }, (_, index) =>
+        createPlaceholder(roundKey, index, matchNumbers[index] || null));
+    }
+
+    function createPlaceholder(roundKey, index, matchNumber) {
+      return {
+        id: `${roundKey}-${matchNumber || index + 1}`,
+        matchNumber,
+        roundKey,
+        status: roundKey === "R32" ? "Awaiting qualifiers" : "Awaiting winner",
+        utcDate: null,
+        winnerCode: null,
+        score: { home: null, away: null },
+        home: { name: "TBD", code: null },
+        away: { name: "TBD", code: null }
+      };
     }
 
     function normalizeMatches(matches) {
@@ -1844,6 +1935,7 @@
 
         return {
           id: match.id || `${roundKey || "match"}-${index}`,
+          matchNumber: resolveMatchNumber(match, roundKey),
           roundKey,
           status: match.status || "SCHEDULED",
           utcDate: match.utcDate || null,
@@ -1862,6 +1954,83 @@
           }
         };
       }).filter((match) => Boolean(match.roundKey));
+    }
+
+    function assignMatchToBracketSlot(rounds, match) {
+      const matchNumbers = BRACKET_MATCH_ORDER[match.roundKey] || [];
+      const slotIndex = matchNumbers.indexOf(match.matchNumber);
+
+      if (slotIndex >= 0 && !rounds[match.roundKey][slotIndex]) {
+        rounds[match.roundKey][slotIndex] = match;
+        return;
+      }
+
+      const emptySlotIndex = matchNumbers.findIndex((_, index) => !rounds[match.roundKey][index]);
+      if (emptySlotIndex >= 0) {
+        rounds[match.roundKey][emptySlotIndex] = match;
+      }
+    }
+
+    function assignFallbackMatchNumbers(matches) {
+      ROUND_ORDER.forEach((roundKey) => {
+        const roundMatches = matches.filter((match) => match.roundKey === roundKey);
+        const usedMatchNumbers = new Set(roundMatches
+          .map((match) => match.matchNumber)
+          .filter(Boolean));
+        const remainingMatchNumbers = (CHRONOLOGICAL_MATCH_NUMBERS[roundKey] || [])
+          .filter((matchNumber) => !usedMatchNumbers.has(matchNumber));
+
+        roundMatches
+          .filter((match) => !match.matchNumber)
+          .sort(sortMatches)
+          .forEach((match, index) => {
+            match.matchNumber = remainingMatchNumbers[index] || null;
+          });
+      });
+
+      return matches;
+    }
+
+    function resolveMatchNumber(match, roundKey) {
+      const explicitNumber = parseMatchNumber(match.matchNumber || match.number || match.matchNo);
+      if (explicitNumber) {
+        return explicitNumber;
+      }
+
+      const footballDataNumber = FOOTBALL_DATA_MATCH_NUMBERS[String(match.id)];
+      if (footballDataNumber) {
+        return footballDataNumber;
+      }
+
+      const kickoffKey = getKickoffKey(match.utcDate);
+      if (kickoffKey && KNOCKOUT_MATCH_NUMBERS_BY_START[kickoffKey]) {
+        return KNOCKOUT_MATCH_NUMBERS_BY_START[kickoffKey];
+      }
+
+      const chronologicalNumbers = CHRONOLOGICAL_MATCH_NUMBERS[roundKey] || [];
+      return chronologicalNumbers.length === 1 ? chronologicalNumbers[0] : null;
+    }
+
+    function parseMatchNumber(value) {
+      if (value == null) {
+        return null;
+      }
+
+      const match = String(value).match(/\d+/);
+      return match ? Number(match[0]) : null;
+    }
+
+    function getKickoffKey(value) {
+      if (!value) {
+        return null;
+      }
+
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) {
+        return null;
+      }
+
+      return date.toISOString().slice(0, 16);
     }
 
     function sortMatches(left, right) {
