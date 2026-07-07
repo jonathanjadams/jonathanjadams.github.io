@@ -23,6 +23,8 @@
       --red-soft: rgba(255, 107, 95, 0.16);
       --blue: #58baff;
       --blue-soft: rgba(88, 186, 255, 0.16);
+      --alive: #39d98a;
+      --alive-soft: rgba(57, 217, 138, 0.14);
       --neutral: #708295;
       --neutral-soft: rgba(112, 130, 149, 0.18);
       --gold: #f0b558;
@@ -643,7 +645,7 @@
     }
 
     .team-country-row.is-alive .team-country-name::before {
-      box-shadow: 0 0 8px rgba(88, 186, 255, 0.5);
+      box-shadow: 0 0 8px rgba(57, 217, 138, 0.5);
     }
 
     .team-country-row.is-eliminated {
@@ -689,7 +691,7 @@
     }
 
     .team-country-row.is-alive .team-country-name::before {
-      background: var(--blue);
+      background: var(--alive);
     }
 
     .team-country-row.is-champion .team-country-name::before {
@@ -736,14 +738,14 @@
     }
 
     .team-country-row.is-alive .team-status {
-      color: var(--blue);
-      border-color: rgba(88, 186, 255, 0.28);
-      background: rgba(88, 186, 255, 0.07);
+      color: var(--alive);
+      border-color: rgba(57, 217, 138, 0.28);
+      background: var(--alive-soft);
     }
 
     .team-country-row.is-alive .team-status::before {
-      background: var(--blue);
-      box-shadow: 0 0 0 0 rgba(88, 186, 255, 0.55);
+      background: var(--alive);
+      box-shadow: 0 0 0 0 rgba(57, 217, 138, 0.55);
       animation: status-pulse 1.9s ease-out infinite;
     }
 
@@ -770,9 +772,9 @@
     }
 
     @keyframes status-pulse {
-      0% { box-shadow: 0 0 0 0 rgba(88, 186, 255, 0.5); }
-      70% { box-shadow: 0 0 0 7px rgba(88, 186, 255, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(88, 186, 255, 0); }
+      0% { box-shadow: 0 0 0 0 rgba(57, 217, 138, 0.5); }
+      70% { box-shadow: 0 0 0 7px rgba(57, 217, 138, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(57, 217, 138, 0); }
     }
 
     .warnings {
